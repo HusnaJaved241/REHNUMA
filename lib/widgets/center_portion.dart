@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rehnuma/constants.dart';
 import 'package:rehnuma/widgets/date_picker.dart';
 import 'package:rehnuma/widgets/goal_cards.dart';
 
@@ -28,7 +29,7 @@ final widgetList = [
   ),
   CenterWidget(
     height: 250.0,
-    question: 'Salam username!',
+    question: 'SALAM username!',
     questionDesc: 'What\'s your email?',
     acutalWidget: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -36,7 +37,7 @@ final widgetList = [
         style: TextStyle(fontSize: 30.0),
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          hintText: 'Type your email',
+          hintText: 'TYPE YOUR EMAIL',
           hintStyle: TextStyle(
             fontSize: 30.0,
           ),
@@ -48,20 +49,20 @@ final widgetList = [
   CenterWidget(
     height: 350.0,
     question: 'When were you born?',
-    questionDesc: 'Knowing this will make us REHNUMA better for you',
+    questionDesc: 'Knowing this will help us make REHNUMA better for you',
     acutalWidget: ScrollingDatePicker(),
   ),
   CenterWidget(
-    height: 300.0,
-    question: 'How to identify you?',
+    height: 400.0,
+    question: 'How do you identify?',
     questionDesc:
-        'Knowing your gender help us provide you with better theme colors',
+        'Knowing your gender help us give you better visuals',
     acutalWidget: GenderWidget(),
   ),
   CenterWidget(
-    height: 300.0,
-    question: 'What\'s your long-term goal?',
-    questionDesc: 'What would you like to improve in your life',
+    height: 500.0,
+    question: 'Long-term Goal',
+    questionDesc: 'What would you like to improve in your life?',
     acutalWidget: GoalCards(),
   ),
 ];
@@ -72,7 +73,7 @@ class CenterPortion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return widgetList[1];
+    return widgetList[4];
   }
 }
 
@@ -84,7 +85,7 @@ class CenterWidget extends StatelessWidget {
   const CenterWidget({
     Key? key,
     required this.question,
-    required this.questionDesc,
+     required this.questionDesc,
     required this.acutalWidget,
     required this.height,
   }) : super(key: key);
@@ -101,8 +102,8 @@ class CenterWidget extends StatelessWidget {
       ),
       margin: const EdgeInsets.only(
         top: 40.0,
-        left: 30.0,
-        right: 30.0,
+        left: 20.0,
+        right: 20.0,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,18 +116,12 @@ class CenterWidget extends StatelessWidget {
                 Text(
                   question,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 35.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: kQuestionTextStyle
                 ),
                 Text(
                   questionDesc,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w700
-                  ),
+                  style: kQuestionDescStyle
                 ),
               ],
             ),

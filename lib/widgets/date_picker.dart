@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+// import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
 
 class ScrollingDatePicker extends StatelessWidget {
-  const ScrollingDatePicker({
-    Key? key,
-  }) : super(key: key);
+  DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
-    return LinearDatePicker(
-        columnWidth: 90.0,
-        startDate: "2004/10/17", //yyyy/mm/dd
-        endDate: "2020/02/20",
-        initialDate: "2010/11/15",
-        dateChangeListener: (String selectedDate) {
-          print(selectedDate);
-        },
-        showDay: true, //false -> only select year & month
-        labelStyle: TextStyle(
-            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.w600),
-        selectedRowStyle: TextStyle(
-          fontSize: 16.0,
+    return DatePickerWidget(
+      looping: false, // default is not looping
+      firstDate: DateTime(1990, 01, 01),
+      lastDate: DateTime(2030, 1, 1),
+      initialDate: DateTime(1991, 10, 12),
+      dateFormat: "dd-MMM-yyyy",
+      locale: DatePicker.localeFromString('en'),
+      onChange: (DateTime newDate, _) => _selectedDate = newDate,
+      pickerTheme: DateTimePickerTheme(
+        backgroundColor: Color(0xffc0ffa6),
+        itemTextStyle: TextStyle(
           color: Colors.black,
+          fontSize: 25.0,
+          fontWeight: FontWeight.w700,
         ),
-        unselectedRowStyle: TextStyle(
-          fontSize: 14.0,
-          color: Colors.grey,
-        ),
-        yearText: "year",
-        monthText: "month",
-        dayText: "day",
-        showLabels: true, // to show column captions, eg. year, month, etc.
-        showMonthName: true,
-        isJalaali: false // false -> Gregorian
-        );
+        dividerColor: Color(0xffebc014),
+      ),
+    );
   }
 }

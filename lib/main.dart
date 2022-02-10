@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
-        seconds: 2,
+        seconds: 1,
         imageBackground: AssetImage('assets/images/12.jpg'),
         // navigateAfterSeconds: StoryPage(),
         navigateAfterSeconds: StoryPage(),
