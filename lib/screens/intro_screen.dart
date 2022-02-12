@@ -16,24 +16,29 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffc0ffa6),
-      
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  setState(() {
+                    if (widgetCount > 0 && progressBarIndex > 1) {
+                      widgetCount--;
+                      progressBarIndex--;
+                    } 
+                    else if (widgetCount <= 0 && progressBarIndex <= 1) {
+                      Navigator.pop(context);
+                    }
+                  });
                 },
                 child: Icon(
                   Icons.arrow_back_outlined,
                   color: Colors.black,
                   size: 30.0,
-                  
                 ),
               ),
               SizedBox(

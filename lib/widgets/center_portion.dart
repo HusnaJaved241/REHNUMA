@@ -15,7 +15,7 @@ final widgetList = [
     questionDesc: 'What should we call you?',
     acutalWidget: CustomTextField(
       hint: 'TYPE YOUR NAME',
-      inputType: TextInputType.name,
+      inputType: TextInputType.name, myController: TextEditingController(),
     ),
   ),
   CenterWidget(
@@ -25,6 +25,7 @@ final widgetList = [
     acutalWidget: CustomTextField(
       hint: 'TYPE YOUR EMAIL',
       inputType: TextInputType.emailAddress,
+      myController: TextEditingController(),
     ),
   ),
   CenterWidget(
