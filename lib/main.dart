@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rehnuma/screens/intro_screen.dart';
+import 'package:rehnuma/screens/personalize_space.dart';
 import 'package:rehnuma/screens/signup_screen.dart';
 import 'package:rehnuma/screens/story_screen.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -20,8 +21,8 @@ class MyApp extends StatelessWidget {
     ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
-        seconds: 1,
-        imageBackground: AssetImage('assets/images/12.jpg'),
+        seconds: 4,
+        imageBackground: AssetImage('assets/images/16.jpg'),
         // navigateAfterSeconds: StoryPage(),
         navigateAfterSeconds: StoryPage(),
         useLoader: false,

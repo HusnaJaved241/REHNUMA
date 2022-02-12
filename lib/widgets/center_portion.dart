@@ -1,49 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:rehnuma/constants.dart';
+import 'package:rehnuma/screens/personalize_space.dart';
+import 'package:rehnuma/widgets/choose_avatar.dart';
+import 'package:rehnuma/widgets/custom_text_field.dart';
 import 'package:rehnuma/widgets/date_picker.dart';
 import 'package:rehnuma/widgets/goal_cards.dart';
 
 import 'gender_widget.dart';
-
-// DateTime _selectedDate = DateTime.now();
 
 final widgetList = [
   CenterWidget(
     height: 250.0,
     question: 'First Things First!!!',
     questionDesc: 'What should we call you?',
-    acutalWidget: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: TextField(
-        style: TextStyle(fontSize: 30.0),
-        keyboardType: TextInputType.name,
-        decoration: InputDecoration(
-          hintText: 'TYPE YOUR NAME',
-          hintStyle: TextStyle(
-            fontSize: 30.0,
-          ),
-        ),
-        textAlign: TextAlign.center,
-      ),
+    acutalWidget: CustomTextField(
+      hint: 'TYPE YOUR NAME',
+      inputType: TextInputType.name,
     ),
   ),
   CenterWidget(
     height: 250.0,
     question: 'SALAM username!',
     questionDesc: 'What\'s your email?',
-    acutalWidget: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: TextField(
-        style: TextStyle(fontSize: 30.0),
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          hintText: 'TYPE YOUR EMAIL',
-          hintStyle: TextStyle(
-            fontSize: 30.0,
-          ),
-        ),
-        textAlign: TextAlign.center,
-      ),
+    acutalWidget: CustomTextField(
+      hint: 'TYPE YOUR EMAIL',
+      inputType: TextInputType.emailAddress,
     ),
   ),
   CenterWidget(
@@ -55,8 +36,7 @@ final widgetList = [
   CenterWidget(
     height: 400.0,
     question: 'How do you identify?',
-    questionDesc:
-        'Knowing your gender help us give you better visuals',
+    questionDesc: 'Knowing your gender help us give you better visuals',
     acutalWidget: GenderWidget(),
   ),
   CenterWidget(
@@ -65,15 +45,23 @@ final widgetList = [
     questionDesc: 'What would you like to improve in your life?',
     acutalWidget: GoalCards(),
   ),
+  CenterWidget(
+    height: 500.0,
+    question: 'Hey, good looking!',
+    questionDesc: 'Customizing your avatar makes REHNUMA fun',
+    acutalWidget: ChooseAvatar(),
+  ),
 ];
 
-
 class CenterPortion extends StatelessWidget {
-  const CenterPortion({Key? key}) : super(key: key);
-
+  final widgetListCount;
+  CenterPortion(
+    this.widgetListCount,
+  );
   @override
   Widget build(BuildContext context) {
-    return widgetList[4];
+  
+      return widgetList[widgetListCount];
   }
 }
 
@@ -85,7 +73,7 @@ class CenterWidget extends StatelessWidget {
   const CenterWidget({
     Key? key,
     required this.question,
-     required this.questionDesc,
+    required this.questionDesc,
     required this.acutalWidget,
     required this.height,
   }) : super(key: key);
@@ -98,10 +86,10 @@ class CenterWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(
           20.0,
         ),
-        color: Colors.white12,
+        color: Color(0xffc0ffa6),
       ),
       margin: const EdgeInsets.only(
-        top: 40.0,
+        top: 30.0,
         left: 20.0,
         right: 20.0,
       ),
@@ -113,16 +101,10 @@ class CenterWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  question,
-                  textAlign: TextAlign.center,
-                  style: kQuestionTextStyle
-                ),
-                Text(
-                  questionDesc,
-                  textAlign: TextAlign.center,
-                  style: kQuestionDescStyle
-                ),
+                Text(question,
+                    textAlign: TextAlign.center, style: kQuestionTextStyle),
+                Text(questionDesc,
+                    textAlign: TextAlign.center, style: kQuestionDescStyle),
               ],
             ),
           ),
@@ -132,4 +114,3 @@ class CenterWidget extends StatelessWidget {
     );
   }
 }
-

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rehnuma/constants.dart';
 import 'package:rehnuma/screens/intro_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -36,12 +35,15 @@ class SignupScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 25.0,
                         color: Colors.black,
+                        fontFamily: 'SukarBlack',
+                        // fontWeight: FontWeight.w300,
                       ),
                       children: <TextSpan>[
                         TextSpan(text: 'BECOME A MEMBER OF'),
                         TextSpan(
+                          
                           text: ' REHNUMA',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 27.0),
                         ),
                         TextSpan(text: ' FAMILY'),
                       ],
@@ -61,11 +63,11 @@ class SignupScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SignupButton(
-                    text: 'Continue with Facebook',
+                    text: 'Continue with Google',
                     image: 'assets/images/google.png',
                   ),
                   SignupButton(
-                    text: 'Continue with Google',
+                    text: 'Continue with Facebook',
                     image: 'assets/images/fb.png',
                   ),
                   SignupButton(

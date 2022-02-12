@@ -15,11 +15,15 @@ const kQuestionDescStyle = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
-// const kSignupButtonStyle = ElevatedButton.styleFrom();
-// final kSignupButtonStyle = ElevatedButton.styleFrom(
-//   padding: const EdgeInsets.symmetric(
-//     horizontal: 20.0,
-//     vertical: 10.0,
-//   ),
-//   primary: Colors.grey
-// );
+final  kTextFieldDecoration = InputDecoration(
+  hintText: 'TYPE YOUR NAME',
+  hintStyle: TextStyle(
+    fontSize: 30.0,
+  ),
+  focusedBorder: OutlineInputBorder(
+      // borderRadius: BorderRadius.circular(30),
+      borderSide: BorderSide(
+        color: Colors.transparent,
+      ),
+    ),
+);

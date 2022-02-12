@@ -46,26 +46,28 @@ class GoalCards extends StatelessWidget {
 }
 
 Widget Cards() {
-  return Card(
-    elevation: 10,
-     shape: RoundedRectangleBorder(
-  borderRadius: BorderRadius.circular(20.0),
-  ),
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0,),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Color(0xff91ac9d),
-            blurRadius: 2.0,
-            spreadRadius: 0.0,
-            offset: Offset(4.0, 4.0),
-          ),
-        ],
-        color: Color(0xff73bb55),
+  return Center(
+    child: Card(
+      elevation: 10,
+       shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20.0),
+    ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0,),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Color(0xff91ac9d),
+              blurRadius: 2.0,
+              spreadRadius: 0.0,
+              offset: Offset(4.0, 4.0),
+            ),
+          ],
+          color: Color(0xff73bb55),
+        ),
+        height: 140.0,
+        width: 130.0,
       ),
-      height: 140.0,
-      width: 150.0,
     ),
   );
 }
