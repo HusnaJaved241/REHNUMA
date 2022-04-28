@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rehnuma/constants.dart';
+import 'package:rehnuma/navigation%20screens/home.dart';
+import 'package:rehnuma/screens/home_screen.dart';
 
 class PersonalizeApp extends StatelessWidget {
   const PersonalizeApp({Key? key}) : super(key: key);
@@ -8,7 +10,7 @@ class PersonalizeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffc0ffa6),
+        backgroundColor: appColor,
         body: Center(
           child: Container(
             child: Column(
@@ -20,6 +22,18 @@ class PersonalizeApp extends StatelessWidget {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.arrow_forward_ios),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

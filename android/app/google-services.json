@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "92853072089",
+    "project_id": "rehnuma-e6ac1",
+    "storage_bucket": "rehnuma-e6ac1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92853072089:android:bf380e4c266d5f790bcec8",
+        "android_client_info": {
+          "package_name": "com.example.rehnuma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92853072089-iukn52asqi5eis3hd3qhddik58d1l3c7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoaQGcqJI6afuGjyKmqKd8VoBjPqBmBdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92853072089-iukn52asqi5eis3hd3qhddik58d1l3c7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

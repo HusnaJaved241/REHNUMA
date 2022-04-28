@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gender_picker/gender_picker.dart';
-import 'package:gender_picker/source/enums.dart';
 
-Widget ButtonStyle(String gender, Color color) {
+Widget buttonStyle(String gender, Color color, Function() onPressed) {
   return GestureDetector(
-    child: Container(
-      width: 200.0,
+    onTap: onPressed,
+    child: Builder(builder: (context) {
+      return Container(
+        width: 200.0,
         padding: const EdgeInsets.symmetric(
           // horizontal: 40.0,
           vertical: 10.0,
@@ -25,63 +25,51 @@ Widget ButtonStyle(String gender, Color color) {
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
-        ),),
+        ),
+      );
+    }),
   );
 }
 
-class GenderWidget extends StatelessWidget {
-  const GenderWidget({Key? key}) : super(key: key);
+class GenderWidget extends StatefulWidget {
+  String gender = "";
 
+  @override
+  State<GenderWidget> createState() => _GenderWidgetState();
+}
+
+class _GenderWidgetState extends State<GenderWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ButtonStyle(
+        buttonStyle(
           'MALE',
           Color(0xff0c687f),
+          () {
+            setState(() {
+              widget.gender = "Male";
+              print(widget.gender);
+            });
+          },
         ),
-        ButtonStyle(
-          'FEMALE',
-          Color(0xfff28d9f),
-        ),
-        ButtonStyle(
-          'OTHER',
-          Color(0xff31a751),
-        ),
+        buttonStyle('FEMALE', Color(0xfff28d9f), () {
+          setState(
+            () {
+              widget.gender = 'Female';
+              print(widget.gender);
+
+            },
+          );
+        }),
+        buttonStyle('OTHER', Color(0xff31a751), () {
+          setState(() {
+            widget.gender = 'Other';
+              print(widget.gender);
+
+          });
+        }),
       ],
     );
-    //  return Container(
-    //   // margin: EdgeInsets.symmetric(vertical: 40),
-    //   alignment: Alignment.center,
-    //   child: GenderPickerWithImage(
-    //     showOtherGender: true,
-    //     verticalAlignedText: true,
-
-    //     // to show what's selected on app opens, but by default it's Male
-    //     // selectedGender: Gender.Male,
-    //     selectedGenderTextStyle: TextStyle(
-    //       color: Color(0xFF8b32a8),
-    //       fontWeight: FontWeight.w700,
-    //       fontSize: 25.0,
-    //     ),
-    //     unSelectedGenderTextStyle: TextStyle(
-    //       color: Colors.black,
-    //       fontWeight: FontWeight.normal,
-    //       fontSize: 20.0,
-    //     ),
-    //     onChanged: (Gender? gender) {
-    //       print(gender);
-    //     },
-    //     //Alignment between icons
-    //     equallyAligned: true,
-
-    //     animationDuration: Duration(milliseconds: 300),
-    //     isCircular: true,
-    //     // default : true,
-    //     opacityOfGradient: 0.4,
-    //     padding: const EdgeInsets.all(3),
-    //     size: 70.0, //default : 40
-    //   ),
-    // );
   }
 }
