@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:rehnuma/home_screen_widgets/search_bar.dart';
-import 'package:rehnuma/navigation%20screens/emotionbased_dua_screen.dart';
-import 'package:rehnuma/navigation%20screens/masnoon_dua_screen.dart';
-import 'package:rehnuma/navigation%20screens/new_story.dart';
-import 'package:rehnuma/screens/home_screen.dart';
-import '../constants.dart';
-import '../screens/more_screen.dart';
+import 'package:rehnuma/navigation%20screens/dua_screen.dart';
+import 'package:rehnuma/screens/more_screen.dart';
 
-class DuaScreen extends StatelessWidget {
-  FocusNode focusNode = FocusNode();
+import '../constants.dart';
+import '../home_screen_widgets/search_bar.dart';
+
+class ZikarScreen extends StatelessWidget {
+  final focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +36,9 @@ class DuaScreen extends StatelessWidget {
             ),
           ),
         ),
-        
         body: Container(
           width: double.infinity,
-      height: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/Background.jpg'),
@@ -52,35 +49,46 @@ class DuaScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 20.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      'Dua',
+                      'Zikr',
                       style: kQuestionTextStyle,
                     ),
                   ),
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/Dua.jpg'),
+                          image: AssetImage('assets/images/Zikar.jpg'),
                           fit: BoxFit.fill),
-                    ),
+                    ),  
                     height: 190.0,
                     margin: const EdgeInsets.symmetric(
-                      vertical: 10.0,
+                      vertical: 5.0,
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(
-                      horizontal: 60.0,
-                      vertical: 60.0,
+                      horizontal: 10.0,
+                      vertical: 10.0,
                     ),
-                    // height: (MediaQuery.of(context).size.height),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    height: (MediaQuery.of(context).size.height),
+                    child: ListView(
                       children: [
-                        CustomTile(text: 'Masnoon Dua', newScreen: MasnoonDuaScreen(),),
-                        SizedBox(height: 20.0,),
-                        CustomTile(text: 'Emotion Based Dua', newScreen: EmotionBasedDuaScreen(),),
+                        CustomTileDua(
+                          text: 'Dua Before Meals',
+                        ),
+                        CustomTileDua(
+                          text: 'Dua Before Eating',
+                        ),
+                        CustomTileDua(
+                          text: 'Dua Before Sleeping',
+                        ),
+                        CustomTileDua(
+                          text: 'Dua When Waking up',
+                        ),
+                        CustomTileDua(
+                          text: 'Dua for Difficult Times',
+                        ),
                       ],
                     ),
                   ),
@@ -94,28 +102,24 @@ class DuaScreen extends StatelessWidget {
   }
 }
 
-class CustomTile extends StatelessWidget {
-  const CustomTile({Key? key, required this.text, required this.newScreen}) : super(key: key);
+class CustomTileDua extends StatelessWidget {
+  const CustomTileDua({Key? key, required this.text}) : super(key: key);
   final String text;
-  final Widget newScreen;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ( ){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => newScreen));
-      },
+      // onTap: () {
+      //   Navigator.push(context, MaterialPageRoute(builder: (context) => newStory()));
+      // },
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xffB788B7),
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Center(
-          child: Text(text, style: TextStyle(
-            color: Colors.white,
-            fontSize: 25.0
-    
-          )),
+          child:
+              Text(text, style: TextStyle(color: Colors.white, fontSize: 25.0)),
         ),
         height: 55.0,
         margin: const EdgeInsets.symmetric(

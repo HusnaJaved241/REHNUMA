@@ -7,13 +7,12 @@ import 'package:rehnuma/navigation%20screens/dua_screen.dart';
 import 'package:rehnuma/navigation%20screens/qassas_screen.dart';
 import 'package:rehnuma/navigation%20screens/salah_traker_screen.dart';
 import 'package:rehnuma/navigation%20screens/therapy_screen.dart';
+import 'package:rehnuma/screens/more_screen.dart';
 
 final List<Widget> _tabItems = [
-  DuaScreen(),
   SalahTrackerScreen(),
   Home(),
-  TherapyScreen(),
-  QassasScreen()
+  MoreScreen(),
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _page = 2;
+  int _page = 1;
   // GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   // TextEditingController searchController = TextEditingController();
   FocusNode focusNode = FocusNode();
@@ -30,27 +29,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       drawer: BuildDrawer(),
       backgroundColor: appColor,
       body: _tabItems[_page],
       bottomNavigationBar: CurvedNavigationBar(
+        
         index: _page,
-        height: 60.0,
+        height: 47.0,
         items: <Widget>[
-          bottomItem(title: "Dua", index: 0, image: 'assets/images/dua.png',
-),
-          bottomItem(title: "Tracker", index: 1, image: 'assets/images/prayer_tracker.png',
-),
-          bottomItem(title: "Home", index: 2, image: 'assets/images/home.png',
-),
-          bottomItem(title: "Therapies", index: 3, image: 'assets/images/therapy1.png',
-),
           bottomItem(
-              title: "Qassas", index: 4, image:  'assets/images/qassas.png',
-),
+            index: 0,
+            image: 'assets/images/praying_man.png',
+          ),
+          bottomItem(
+            index: 1,
+            image: 'assets/images/home.png',
+          ),
+          bottomItem(
+            index: 2,
+            image: 'assets/images/more_options.png',
+          ),
         ],
-        color: Colors.white,
-        buttonBackgroundColor: Colors.white,
+        color: Colors.white24,
+        buttonBackgroundColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
@@ -60,29 +62,23 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-      
     );
   }
 
   Widget bottomItem(
-      {required int index, required String title, required String image}) {
+      {required int index, required String image}) {
     if (index == _page) {
-      return Image.asset(image, height: 30.0,);
+      return Image.asset(
+        image,
+        height: 20.0,
+      );
     } else {
       return Padding(
         padding: const EdgeInsets.only(top: 6.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(image, height: 35.0,),
-            const SizedBox(height: 5),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.black),
-            )
-          ],
-        ),
+        child: Image.asset(
+              image,
+              height: 30.0,
+            ),
       );
     }
   }

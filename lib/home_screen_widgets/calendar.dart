@@ -19,7 +19,7 @@ class _CalendarState extends State<Calendar> {
     return Container(
       height: 200.0,
       margin: EdgeInsets.symmetric(horizontal: 1.0, vertical: 0.0),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: CalendarCarousel(
         isScrollable: true,
         headerMargin: const EdgeInsets.all(0),
@@ -28,7 +28,7 @@ class _CalendarState extends State<Calendar> {
           color: Colors.white,
           fontSize: 15.0
         ),
-        weekDayPadding: const EdgeInsets.all(9.0),
+        weekDayPadding: const EdgeInsets.all(8.0),
         weekDayMargin: const EdgeInsets.all(1.0),
         dayButtonColor: Colors.pink.shade100,
         onDayPressed: (DateTime date, List events) {

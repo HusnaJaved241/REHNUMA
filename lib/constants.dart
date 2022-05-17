@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+final kTextColor = Color(0xff2A2A2A);
+
 final kSignupButtonTextStyle = TextStyle(
   fontSize: 20.0,
 );
@@ -8,12 +10,15 @@ final kSignupButtonTextStyle = TextStyle(
 const kQuestionTextStyle = TextStyle(
   fontSize: 35.0,
   fontWeight: FontWeight.bold,
+    // color: Color(0xFF362F2F),
+    color: Color(0xff2a2a2a)
+
 );
 
 const kQuestionDescStyle = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.w700,
-  color: Colors.black,
+  color: Color(0xFF362F2F),
 );
 
 final kTextFieldDecoration = InputDecoration(

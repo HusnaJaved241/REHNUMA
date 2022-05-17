@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:rehnuma/constants.dart';
+import 'package:rehnuma/screens/today_performa_screen.dart';
 
 class HomeCard extends StatelessWidget {
   final height;
@@ -33,7 +36,22 @@ class HomeCard extends StatelessWidget {
 }
 
 class Card1 extends StatelessWidget {
-  const Card1({Key? key}) : super(key: key);
+  final now = DateTime.now();
+  HijriCalendar today = HijriCalendar.now();
+  String greetingMessage(){
+
+  var timeNow = DateTime.now().hour;
+  
+  if (timeNow <= 12) {
+    return 'Good Morning';
+  } else if ((timeNow > 12) && (timeNow <= 16)) {
+  return 'Good Afternoon';
+  } else if ((timeNow > 16) && (timeNow < 20)) {
+  return 'Good Evening';
+  } else {
+  return 'Good Night';
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +59,7 @@ class Card1 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Good Evening,',
+          greetingMessage(),
           style: TextStyle(
             fontSize: 23.0,
           ),
@@ -61,15 +79,15 @@ class Card1 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'February 2, 2022',
+                    DateFormat.yMMMMd().format(now).toString(),
                     style: kCard1TextStyle,
                   ),
                   Text(
-                    'Jumada ll 30, 1443 AH',
+                    today.toFormat("MMMM ll dd, yyyy").toString(),
                     style: kCard1TextStyle,
                   ),
                   Text(
-                    'Monday',
+                    DateFormat.EEEE().format(now).toString(),
                     style: kCard1TextStyle,
                   ),
                 ],
@@ -88,29 +106,34 @@ class Card2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: 12.0,
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5.0,
-            vertical: 8.0,
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 3.0,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => TodayPerformaScreen()));
+          },
+          child: Container(
+            margin: const EdgeInsets.only(
+              top: 7.0,
+              // horizontal: 8.0,
             ),
-            borderRadius: BorderRadius.circular(
-              10.0,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5.0,
+              vertical: 8.0,
             ),
-          ),
-          child: Text(
-            'How are you feeling today?',
-            style: kQuestionDescStyle,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 2.0,
+              ),
+              borderRadius: BorderRadius.circular(
+                10.0,
+              ),
+            ),
+            child: Text(
+              'How are you feeling today?',
+              style: kQuestionDescStyle,
+            ),
           ),
         ),
         SingleChildScrollView(
@@ -136,11 +159,8 @@ Widget calendarContainer() {
     padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
     margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
     decoration: BoxDecoration(
-      border: Border.all(
-        width: 2.0
-      ),
-      borderRadius: BorderRadius.circular(8.0)
-    ),
+        border: Border.all(width: 2.0),
+        borderRadius: BorderRadius.circular(8.0)),
     child: Column(
       children: [
         Text(
@@ -176,4 +196,3 @@ class Card3 extends StatelessWidget {
     );
   }
 }
-
