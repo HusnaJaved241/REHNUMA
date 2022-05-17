@@ -19,9 +19,7 @@ class PracticeFirebase extends StatelessWidget {
             child: Icon(Icons.add),
             onPressed: () {
               print('pressed');
-              FirebaseFirestore.instance.collection('Users/CVi8AoIKOsTtfERgI2YR/Userdata').snapshots().listen((data) {
-                print(data);
-              }); // 
+              var data = FirebaseFirestore.instance.collection('users').get();
             },
           ),
     );
