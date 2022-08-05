@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:rehnuma/constants.dart';
+import 'package:rehnuma/screens/feedback_screen.dart';
 import 'package:rehnuma/screens/home_screen.dart';
 import 'package:rehnuma/screens/practice_expansion.dart';
 import 'package:rehnuma/screens/signin_screen.dart';
@@ -13,6 +14,7 @@ import 'package:rehnuma/screens/today_performa_screen.dart';
 // ignore: import_of_legacy_library_into_null_safe
 
 import 'navigation screens/home.dart';
+import 'screens/about_us.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,15 +29,19 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         fontFamily: 'SukarBlack',
+        primaryColor: appColor,
+        appBarTheme: AppBarTheme(backgroundColor: appColor),
       ),
       getPages: [
         GetPage(name: '/', page: () => HomeScreen()),
         GetPage(name: "/register", page: () => SignupScreen()),
         GetPage(name: "/login", page: () => SignInScreen()),
         GetPage(name: "/splash", page: () => SplashScreen()),
+        GetPage(name: "/aboutus", page: () => AboutUsScreen()),
+        GetPage(name: "/feedback", page: () => FeedbackScreen())
       ],
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: "/feedback",
     );
   }
 }
