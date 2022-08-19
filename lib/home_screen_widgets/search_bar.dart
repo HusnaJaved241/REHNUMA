@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:rehnuma/constants.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key, required this.focusNode}) : super(key: key);
+  const SearchBar({Key? key, required this.focusNode, this.searchString}) : super(key: key);
   final focusNode;
+
+  final searchString;
   @override
   State<SearchBar> createState() => _SearchBarState();
 }
@@ -49,14 +51,16 @@ class _SearchBarState extends State<SearchBar> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.green,
+              color: appColor,
               width: 2.0,
             ),
           ),
           // focusColor: Colors.green,
           filled: true,
         ),
+        onChanged:(value) => widget.searchString(value),
       ),
     );
   }
+
 }

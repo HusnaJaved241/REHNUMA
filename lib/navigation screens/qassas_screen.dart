@@ -9,20 +9,60 @@ import '../constants.dart';
 import 'dua_screen.dart';
 import 'new_story.dart';
 
-class QassasScreen extends StatelessWidget {
+class QassasScreen extends StatefulWidget {
+  @override
+  State<QassasScreen> createState() => _QassasScreenState();
+}
+
+class _QassasScreenState extends State<QassasScreen> {
   FocusNode focusNode = FocusNode();
+
   List qassas = qassasList;
+  // var searchedQissa = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    // searchedQissa = qassas;
+    super.initState();
+  }
+
+  void searchString(String query) {
+    var results = [];
+    if (query.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      setState(() {
+        results = qassasList;
+      });
+    } else {
+      results = qassas.where((element) {
+        final name = element.name.toLowerCase();
+        final input = query.toLowerCase();
+        return name.contains(input);
+      }).toList();
+      setState(() {
+        qassas = results;
+      });
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+    // final suggestions = qassas.where((element) {
+    //   final name = element.name.toLowerCase();
+    //   final input = query.toLowerCase();
+    //   return name.contains(input);
+    // }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           actions: [
             SearchBar(
               focusNode: focusNode,
+              searchString: searchString,
             ),
           ],
           backgroundColor: Colors.transparent,
@@ -109,8 +149,10 @@ class CustomTileQassas extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Center(
-          child:
-              Text(text, style: TextStyle(color: Colors.white, fontSize: 25.0)),
+          child: Text(
+            text,
+            style: kNormalBoldWhiteTextStyle,
+          ),
         ),
         height: 55.0,
         margin: const EdgeInsets.symmetric(

@@ -46,6 +46,7 @@ class _BuildDrawerState extends State<BuildDrawer> {
       backgroundColor: Color(0xffBE7FB0),
       child: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DrawerHeader(

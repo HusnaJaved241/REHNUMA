@@ -21,6 +21,17 @@ final kSignupButtonTextStyle = TextStyle(
   fontFamily: 'SularBlack',
   fontSize: 20.0,
 );
+final kNormalTextStyle = TextStyle(
+  fontSize: 20.0,
+  fontFamily: 'SukarBlackRegular',
+  color: Colors.black87,
+);
+final kNormalBoldWhiteTextStyle = TextStyle(
+  fontSize: 20.0,
+  fontFamily: 'SukarBlackRegular',
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
 final kWhiteTextStyle = TextStyle(
   fontSize: 20.0,
   color: Colors.white,

@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // extendBody: true,
       drawer: BuildDrawer(),
       backgroundColor: appColor,
+      resizeToAvoidBottomInset: false,
       body: _tabItems[_page],
       bottomNavigationBar: CurvedNavigationBar(
         

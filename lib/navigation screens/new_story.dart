@@ -57,13 +57,7 @@ class newStory extends StatelessWidget {
                       // fontFamily: 'SukarBlack',
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  qassas[index].introduction,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    color: Colors.black87,
-                  ),
-                ),
+                Text(qassas[index].introduction, style: kNormalTextStyle),
                 Text(
                   'Story',
                   style: TextStyle(
@@ -74,7 +68,7 @@ class newStory extends StatelessWidget {
                 ),
                 Text(
                   qassas[index].story,
-                  style: TextStyle(fontSize: 22.0, color: Colors.black87),
+                  style: kNormalTextStyle,
                 ),
                 Text(
                   'Mentioned in Quran',
@@ -87,10 +81,7 @@ class newStory extends StatelessWidget {
                 ),
                 Text(
                   qassas[index].hawala,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    color: Colors.black87,
-                  ),
+                  style: kNormalTextStyle,
                 ),
               ],
             ),

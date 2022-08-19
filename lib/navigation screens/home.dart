@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
         FocusManager.instance.primaryFocus!.unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: appColor,
         appBar: AppBar(
           leading: GestureDetector(

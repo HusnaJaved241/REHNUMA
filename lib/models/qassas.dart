@@ -20,7 +20,7 @@ List<Qassas> qassasList = [
         "Then Adam received from his Lord [some] words, and Allah accepted his repentance. Indeed, it is Allah who is the accepting of repentance, the Merciful. (Surah Al-Baqarah 2:37).\nAnd Allah said, \"O Adam, both you and your spouse live in the Paradise, eat freely to your fill wherever you like, but approach not this tree or you will become transgressors/wrongdoers.\" (Surah Al-Baqarah 2:35).",
   ),
   Qassas(
-    name: "HHAZRAT AYUB(AS)",
+    name: "HAZRAT AYUB(AS)",
     introduction:
         "Prophet Ayyub (Job) was a descendant of Prophet Ibrahim. Ayyub\'s mother was the daughter of Prophet Lut and his wife was a direct descendant of Prophet Yusuf. Ayyub lived in Rome with his dear wife Rahma and fourteen children.",
     story:
