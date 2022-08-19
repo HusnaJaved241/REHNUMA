@@ -1,9 +1,18 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rehnuma/constants.dart';
 import 'package:rehnuma/controllers/auth_controller.dart';
+import 'package:rehnuma/screens/about_us.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:feedback/feedback.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../appvariables.dart';
 
@@ -55,14 +64,27 @@ class _BuildDrawerState extends State<BuildDrawer> {
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        child: Image.asset('assets/images/girl_avatar.jpg'),
-                        radius: 52.0,
+                      Container(
+                        height: MediaQuery.of(context).size.height * .12,
+                        width: MediaQuery.of(context).size.width * .5,
+                        decoration: BoxDecoration(
+                            color: Colors.teal, shape: BoxShape.circle),
+                        child: Center(
+                          child: SvgPicture.string(
+                            AppVariables.box.read("image"),
+                            fit: BoxFit.fill,
+                            height: MediaQuery.of(context).size.height * .12,
+                            width: MediaQuery.of(context).size.width * .5,
+                          ),
+                        ),
                       ),
                       Text(
-                        'Name to be displayed here',
+                        AppVariables.box.read("name"),
                         style: kQuestionDescStyle,
+                        overflow: TextOverflow.ellipsis,
+                        // textAlign: TextAlign.center,
                       )
                     ],
                   ),
@@ -75,6 +97,14 @@ class _BuildDrawerState extends State<BuildDrawer> {
                 'About us',
                 style: kQuestionDescStyle,
               ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutUsScreen(),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.share),
@@ -82,6 +112,11 @@ class _BuildDrawerState extends State<BuildDrawer> {
                 'Share REHNUMA',
                 style: kQuestionDescStyle,
               ),
+              onTap: () {
+                Share.share(
+                  "Check out our app on Github https://github.com/HusnaJaved241/rehnuma1",
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.message),
@@ -89,6 +124,29 @@ class _BuildDrawerState extends State<BuildDrawer> {
                 'Feedback',
                 style: kQuestionDescStyle,
               ),
+              onTap: () {
+                BetterFeedback.of(context).show((p0) async {
+                  Uint8List imageInUnit8List = p0.screenshot;
+                  final tempDir = await getTemporaryDirectory();
+                  File file = await File('${tempDir.path}/image.png').create();
+                  file.writeAsBytesSync(imageInUnit8List);
+                  final Email email = Email(
+                    body: p0.text,
+                    subject: 'REHNUMA Feedback',
+                    recipients: ['husna.bsse3670@iiu.edu.pk', 'maham.bsse3666@iiu.edu.pk'],
+                    // cc: ['cc@example.com'],
+                    // bcc: ['bcc@example.com'],
+                    attachmentPaths: ['${tempDir.path}/image.png'],
+                    isHTML: false,
+                  );
+
+                  await FlutterEmailSender.send(email);
+                  // Share.shareFiles(
+                  //   ['${tempDir.path}/image.png'],
+                  //   text: p0.text,
+                  // );
+                });
+              },
             ),
             ListTile(
               leading: Icon(Icons.settings),

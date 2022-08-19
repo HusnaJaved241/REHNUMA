@@ -7,6 +7,8 @@ class UserModel {
     required this.email,
     required this.gender,
     required this.goal,
+    required this.birthday,
+    required this.image,
     this.docId,
   });
 
@@ -14,6 +16,8 @@ class UserModel {
   String email;
   String gender;
   String goal;
+  Timestamp birthday;
+  String image;
   String? docId;
 
   factory UserModel.fromJson(DocumentSnapshot json) {
@@ -23,6 +27,8 @@ class UserModel {
         email: json["email"],
         gender: json["gender"],
         goal: json["goal"],
+        image: json['emoji'],
+        birthday: json['date'],
         docId: json.id);
   }
 

@@ -19,7 +19,7 @@ class PasswordlessLoginServices{
 
   void handleLink(Uri link,userEmail) async {
     if (link != null) {
-      print(userEmail);
+
       final UserCredential user = await FirebaseAuth.instance.signInWithEmailLink(
         email:userEmail,
         emailLink:link.toString(),

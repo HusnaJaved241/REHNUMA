@@ -16,146 +16,147 @@ class _GoalCardsState extends State<GoalCards> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        GoalImagewithLabel(
-                          assetName: 'assets/images/live-successful-life.png',
-                          title: 'Live a successful life',
-                          newScreen: DuaScreen(),
-                          onTap: () {
-                            setState(() {
-                              AppVariables.selectedGoal =
-                                  'Live a successful life';
-                            });
-                          },
-                        ),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppVariables.selectedGoal ==
-                                      "Live a successful life"
-                                  ? Colors.greenAccent
-                                  : Colors.transparent),
-                          child: Center(
-                              child: AppVariables.selectedGoal ==
-                                      "Live a successful life"
-                                  ? Icon(Icons.check)
-                                  : Container()),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        GoalImagewithLabel(
-                          assetName: 'assets/images/become-better-muslim.jpg',
-                          title: 'Become a better Muslim',
-                          newScreen: DuaScreen(),
-                          onTap: () {
+      color: Colors.white,
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height * 0.4,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      GoalImagewithLabel(
+                        assetName: 'assets/images/live-successful-life.png',
+                        title: 'Live a successful life',
+                        newScreen: DuaScreen(),
+                        onTap: () {
+                          setState(() {
                             AppVariables.selectedGoal =
-                                'Become a better Muslim';
-                            setState(() {});
-                          },
-                        ),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppVariables.selectedGoal ==
-                                      "Become a better Muslim"
-                                  ? Colors.greenAccent
-                                  : Colors.transparent),
-                          child: Center(
+                                'Live a successful life';
+                          });
+                        },
+                      ),
+                      Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppVariables.selectedGoal ==
+                                    "Live a successful life"
+                                ? Colors.greenAccent
+                                : Colors.transparent),
+                        child: Center(
                             child: AppVariables.selectedGoal ==
-                                    "Become a better Muslim"
+                                    "Live a successful life"
                                 ? Icon(Icons.check)
-                                : Container(),
-                          ),
-                        )
-                      ],
-                    ),
+                                : Container()),
+                      )
+                    ],
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        GoalImagewithLabel(
-                          assetName: 'assets/images/improve-relationships.png',
-                          title: 'Improve Relationships',
-                          newScreen: DuaScreen(),
-                          onTap: () {
-                            AppVariables.selectedGoal = 'Improve Relationships';
-                            setState(() {});
-                          },
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      GoalImagewithLabel(
+                        assetName: 'assets/images/become-better-muslim.jpg',
+                        title: 'Become a better Muslim',
+                        newScreen: DuaScreen(),
+                        onTap: () {
+                          AppVariables.selectedGoal =
+                              'Become a better Muslim';
+                          setState(() {});
+                        },
+                      ),
+                      Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppVariables.selectedGoal ==
+                                    "Become a better Muslim"
+                                ? Colors.greenAccent
+                                : Colors.transparent),
+                        child: Center(
+                          child: AppVariables.selectedGoal ==
+                                  "Become a better Muslim"
+                              ? Icon(Icons.check)
+                              : Container(),
                         ),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppVariables.selectedGoal ==
-                                      "Improve Relationships"
-                                  ? Colors.greenAccent
-                                  : Colors.transparent),
-                          child: Center(
-                              child: AppVariables.selectedGoal ==
-                                      "Improve Relationships"
-                                  ? Icon(Icons.check)
-                                  : Container()),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        GoalImagewithLabel(
-                          assetName: 'assets/images/strengthen-faith.png',
-                          title: 'Strengthen Faith & Patience',
-                          newScreen: DuaScreen(),
-                          onTap: () {
-                            AppVariables.selectedGoal =
-                                'Strengthen Faith & Patience';
-                            setState(() {});
-                          },
-                        ),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppVariables.selectedGoal ==
-                                      "Strengthen Faith & Patience"
-                                  ? Colors.greenAccent
-                                  : Colors.transparent),
-                          child: Center(
-                              child: AppVariables.selectedGoal ==
-                                      "Strengthen Faith & Patience"
-                                  ? Icon(Icons.check)
-                                  : Container()),
-                        )
-                      ],
-                    ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      GoalImagewithLabel(
+                        assetName: 'assets/images/improve-relationships.png',
+                        title: 'Improve Relationships',
+                        newScreen: DuaScreen(),
+                        onTap: () {
+                          AppVariables.selectedGoal = 'Improve Relationships';
+                          setState(() {});
+                        },
+                      ),
+                      Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppVariables.selectedGoal ==
+                                    "Improve Relationships"
+                                ? Colors.greenAccent
+                                : Colors.transparent),
+                        child: Center(
+                            child: AppVariables.selectedGoal ==
+                                    "Improve Relationships"
+                                ? Icon(Icons.check)
+                                : Container()),
+                      )
+                    ],
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      GoalImagewithLabel(
+                        assetName: 'assets/images/strengthen-faith.png',
+                        title: 'Strengthen Faith & Patience',
+                        newScreen: DuaScreen(),
+                        onTap: () {
+                          AppVariables.selectedGoal =
+                              'Strengthen Faith & Patience';
+                          setState(() {});
+                        },
+                      ),
+                      Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppVariables.selectedGoal ==
+                                    "Strengthen Faith & Patience"
+                                ? Colors.greenAccent
+                                : Colors.transparent),
+                        child: Center(
+                            child: AppVariables.selectedGoal ==
+                                    "Strengthen Faith & Patience"
+                                ? Icon(Icons.check)
+                                : Container()),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

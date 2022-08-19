@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 class AppVariables{
   static String selectedGoal = "";
   static String selectedGender = "";
+  static String imageString = "";
   static final FirebaseAuth auth = FirebaseAuth.instance;
   static final box = GetStorage();
 }

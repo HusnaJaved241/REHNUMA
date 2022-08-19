@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:listview_utils/listview_utils.dart';
+import 'package:rehnuma/models/masnoon_duaen.dart';
 import 'package:rehnuma/navigation%20screens/dua_screen.dart';
 
 import '../constants.dart';
 import '../home_screen_widgets/search_bar.dart';
+import 'emotionbased_dua_screen.dart';
 
 class MasnoonDuaScreen extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class MasnoonDuaScreen extends StatefulWidget {
 }
 
 class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
+  List masnoonDua = masnoonDuaList;
   FocusNode focusNode = FocusNode();
 
   @override
@@ -50,42 +54,33 @@ class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
           ),
           child: SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 10.0,
+                ),
+                height: MediaQuery.of(context).size.height,
+                child: CustomListView(
+                  header: Container(
+                    padding: const EdgeInsets.only(top: 7.0),
+                    child: SelectableText(
                       'Masnoon Dua',
                       style: kQuestionTextStyle,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 10.0,
-                    ),
-                    height: (MediaQuery.of(context).size.height),
-                    child: ListView(
-                      children: [
-                        AnimatedTile(
-                          text: 'Dua Before Meals',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua Before Eating',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua Before Sleeping',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua When Waking up',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua for Difficult Times',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  // shrinkWrap: true,
+                  pageSize: 20,
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  itemBuilder: (context, index, dynamic item) {
+                    return AnimatedTile2(
+                      text: masnoonDua[index].name,
+                      dua: masnoonDua[index].dua,
+                      translation: masnoonDua[index].translation,
+                    );
+                  },
+                  itemCount: masnoonDua.length,
+                ),
               ),
             ),
           ),
@@ -94,8 +89,6 @@ class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
     );
   }
 }
-
-
 
 class AnimatedTile extends StatefulWidget {
   const AnimatedTile({Key? key, required this.text}) : super(key: key);
@@ -129,10 +122,15 @@ class _AnimatedTileState extends State<AnimatedTile> {
                 color: Color(0xffB788B7),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Center(
+              child: Container(
+                alignment: Alignment.center,
                 child: Text(
                   widget.text,
-                  style: TextStyle(color: Colors.white, fontSize: 25.0),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25.0,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               height: 55.0,

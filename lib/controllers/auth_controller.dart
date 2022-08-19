@@ -47,6 +47,8 @@ class AuthController extends GetxController {
           AppVariables.box.write("gender", userModel.gender);
           AppVariables.box.write("goal", userModel.goal);
           AppVariables.box.write("docId", userModel.docId);
+          AppVariables.box.write("image", userModel.image);
+          AppVariables.box.write("date", userModel.birthday.toString());
           return userModel;
         } else {
           return null;

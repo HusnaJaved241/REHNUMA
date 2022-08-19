@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../home_screen_widgets/home_page_body.dart';
 import '../home_screen_widgets/search_bar.dart';
+import '../models/date_model.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,6 +13,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   TextEditingController searchController = TextEditingController();
   FocusNode focusNode = FocusNode();
+  List<DateModel> dates = [];
+  final _dateFormatter = DateFormat('d');
+  final _monthFormatter = DateFormat('MMM');
+  void getDates(){
+    for (int i = 0; i < 30; i++) {
+      final date = DateTime.now().add(Duration(days: -i));
+      final day = DateFormat('EEEE').format(date);
+      dates.add(DateModel(date: _dateFormatter.format(date),month: _monthFormatter.format(date),day: day));
+    }
+  }
+  @override
+  void initState() {
+    getDates();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +81,7 @@ class _HomeState extends State<Home> {
                       flex: 3,
                       child: HomeCard(
                         // height: 160.0,
-                        child: Card2(),
+                        child: Card2(dates: dates.reversed.toList()),
                       ),
                     ),
                     Expanded(

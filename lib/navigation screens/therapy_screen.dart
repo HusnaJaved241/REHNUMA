@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:listview_utils/listview_utils.dart';
+import 'package:rehnuma/models/therapy_model.dart';
+import 'package:rehnuma/navigation%20screens/therapy_detail_screen.dart';
 import 'package:rehnuma/screens/home_screen.dart';
 import 'package:rehnuma/screens/more_screen.dart';
 
@@ -9,6 +12,7 @@ import 'dua_screen.dart';
 
 class TherapyScreen extends StatelessWidget {
   FocusNode focusNode = FocusNode();
+  List therapyList = therapiesList;
 
   @override
   Widget build(BuildContext context) {
@@ -48,48 +52,32 @@ class TherapyScreen extends StatelessWidget {
           ),
           child: SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 10.0,
+                ),
+                height: MediaQuery.of(context).size.height,
+                child: CustomListView(
+                  header: Container(
+                    padding: const EdgeInsets.only(top: 7.0),
+                    child: SelectableText(
                       'Therapies',
                       style: kQuestionTextStyle,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 10.0,
-                    ),
-                    height: (MediaQuery.of(context).size.height),
-                    child: ListView(
-                      children: [
-                        CustomTileTherapy(
-                          text: 'Practice Gratitute',
-                        ),
-                        CustomTileTherapy(
-                          text: 'Mindfulness Techniques',
-                        ),
-                        CustomTileTherapy(
-                          text: 'Meditation',
-                        ),
-                        CustomTileTherapy(
-                          text: 'Concetration Techniques',
-                        ),
-                        CustomTileTherapy(
-                          text: 'Journaling and Thought records',
-                        ),
-                        CustomTileTherapy(
-                          text: 'Role Playing',
-                        ),
-                        CustomTileTherapy(
-                          text: 'Relaxation and stress reduction',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  // shrinkWrap: true,
+                  pageSize: 20,
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  itemBuilder: (context, index, dynamic item) {
+                    return CustomTileTherapy(
+                      text: therapyList[index].name,
+                      index: index,
+                    );
+                  },
+                  itemCount: therapyList.length,
+                ),
               ),
             ),
           ),
@@ -100,23 +88,26 @@ class TherapyScreen extends StatelessWidget {
 }
 
 class CustomTileTherapy extends StatelessWidget {
-  const CustomTileTherapy({Key? key, required this.text}) : super(key: key);
+  const CustomTileTherapy({Key? key, required this.text, required this.index})
+      : super(key: key);
   final String text;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: ( ){
-      //   Navigator.push(context, MaterialPageRoute(builder: (context) => newScreen));
-      // },
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => TherapyDetailScreen(
+                      index: index,
+                    )));
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xffB788B7),
           borderRadius: BorderRadius.circular(10.0),
-        ),
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.012,
-          horizontal: MediaQuery.of(context).size.width * 0.012,
         ),
         child: Center(
           child: Text(
@@ -125,7 +116,7 @@ class CustomTileTherapy extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        // height: 55.0,
+        height: MediaQuery.of(context).size.height * 0.1,
         margin: const EdgeInsets.symmetric(
           horizontal: 10.0,
           vertical: 5.0,

@@ -17,6 +17,8 @@ Color getColor(Set<MaterialState> states) {
 final kTextColor = Color(0xff2A2A2A);
 
 final kSignupButtonTextStyle = TextStyle(
+  // fontWeight: FontWeight.bold,
+  fontFamily: 'SularBlack',
   fontSize: 20.0,
 );
 final kWhiteTextStyle = TextStyle(

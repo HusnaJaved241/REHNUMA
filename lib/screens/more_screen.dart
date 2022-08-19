@@ -19,18 +19,18 @@ class MoreScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 27.0,
-            ),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-              ),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 27.0,
+          ),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
             ),
           ),
+        ),
         actions: [
           SearchBar(
             focusNode: focusNode,
@@ -60,7 +60,7 @@ class MoreScreen extends StatelessWidget {
                     ),
                     VerticalDivider(
                       color: Colors.grey,
-                      thickness: 2.0,
+                      thickness: 1.0,
                       indent: 20.0,
                     ),
                     Expanded(
@@ -125,6 +125,8 @@ class ImagewithLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var currentWidth = MediaQuery.of(context).size.width;
+    var currentHeight = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
@@ -135,9 +137,21 @@ class ImagewithLabel extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Image.asset(
-              assetName,
-              height: 170.0,
+            Container(
+              height: currentHeight * .2,
+              // width: currentWidth * .05,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.amber,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.asset(
+                  assetName,
+                  fit: BoxFit.fill,
+                  width: currentWidth * .5,
+                ),
+              ),
             ),
             Text(
               title,

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:listview_utils/listview_utils.dart';
+import 'package:rehnuma/models/azkar_model.dart';
 import 'package:rehnuma/navigation%20screens/dua_screen.dart';
 import 'package:rehnuma/navigation%20screens/masnoon_dua_screen.dart';
 import 'package:rehnuma/screens/more_screen.dart';
 
 import '../constants.dart';
 import '../home_screen_widgets/search_bar.dart';
+import 'emotionbased_dua_screen.dart';
 
 class ZikarScreen extends StatelessWidget {
+  List zikrList = azkarList;
+
   final focusNode = FocusNode();
 
   @override
@@ -47,53 +52,34 @@ class ZikarScreen extends StatelessWidget {
           ),
           child: SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      'Zikr',
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 10.0,
+                ),
+                height: MediaQuery.of(context).size.height,
+                child: CustomListView(
+                  header: Container(
+                    padding: const EdgeInsets.only(top: 7.0),
+                    child: SelectableText(
+                      'Azkar',
                       style: kQuestionTextStyle,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/Zikar.jpg'),
-                          fit: BoxFit.fill),
-                    ),  
-                    height: 190.0,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 5.0,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 10.0,
-                    ),
-                    height: (MediaQuery.of(context).size.height),
-                    child: ListView(
-                      children: [
-                        AnimatedTile(
-                          text: 'Dua Before Meals',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua Before Eating',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua Before Sleeping',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua When Waking up',
-                        ),
-                        AnimatedTile(
-                          text: 'Dua for Difficult Times',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  // shrinkWrap: true,
+                  pageSize: 20,
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  itemBuilder: (context, index, dynamic item) {
+                    return AnimatedTile2ForZikr(
+                      text: zikrList[index].dua,
+                      dua: "Translation: " + zikrList[index].translation,
+                      translation:
+                          "Significance: " + zikrList[index].significance,
+                    );
+                  },
+                  itemCount: zikrList.length,
+                ),
               ),
             ),
           ),
@@ -103,30 +89,85 @@ class ZikarScreen extends StatelessWidget {
   }
 }
 
-class CustomTileDua extends StatelessWidget {
-  const CustomTileDua({Key? key, required this.text}) : super(key: key);
-  final String text;
+class AnimatedTile2ForZikr extends StatefulWidget {
+  const AnimatedTile2ForZikr({
+    Key? key,
+    required this.text,
+    required this.dua,
+    required this.translation,
+  }) : super(key: key);
+  final text, dua, translation;
+
+  @override
+  State<AnimatedTile2ForZikr> createState() => _AnimatedTile2ForZikrState();
+}
+
+class _AnimatedTile2ForZikrState extends State<AnimatedTile2ForZikr> {
+  double _animatedHeight = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(context, MaterialPageRoute(builder: (context) => newStory()));
-      // },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color(0xffB788B7),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Center(
-          child:
-              Text(text, style: TextStyle(color: Colors.white, fontSize: 25.0)),
-        ),
-        height: 55.0,
-        margin: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 5.0,
-        ),
+    return Container(
+      decoration: BoxDecoration(
+          color: Color(0xffD9D9D9), borderRadius: BorderRadius.circular(10.0)),
+      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          new GestureDetector(
+            onTap: () => setState(() {
+              _animatedHeight != 0.0
+                  ? _animatedHeight = 0.0
+                  : _animatedHeight = 200.0;
+            }),
+            child: Container(
+              alignment: Alignment.centerRight,
+              decoration: BoxDecoration(
+                color: Color(0xffB788B7),
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ),
+              ),
+              child: Align(
+                // alignment: Alignment.centerRight,
+                child: Text(
+                  widget.text,
+                  style: TextStyle(
+                      fontSize: 22.0, color: Colors.white, fontFamily: 'Amiri'),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * .1,
+            ),
+          ),
+          new AnimatedContainer(
+            duration: const Duration(milliseconds: 120),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.dua,
+                    style: kSignupButtonTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  Text(
+                    widget.translation,
+                    style: kSignupButtonTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            height: _animatedHeight,
+            padding: const EdgeInsets.all(12.0),
+          )
+        ],
       ),
     );
   }

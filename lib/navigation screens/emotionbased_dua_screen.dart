@@ -128,6 +128,7 @@ class _AnimatedTile2State extends State<AnimatedTile2> {
                 child: Text(
                   widget.text,
                   style: kBigWhiteTextStyle,
+                  textAlign: TextAlign.center,
                 ),
               ),
               height: 55.0,
@@ -142,7 +143,10 @@ class _AnimatedTile2State extends State<AnimatedTile2> {
                 children: [
                   Text(
                     widget.dua,
-                    style: kSignupButtonTextStyle,
+                    style: TextStyle(
+                      fontFamily: 'Amiri',
+                      fontSize: 20.0,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(

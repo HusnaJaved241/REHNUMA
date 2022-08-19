@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:fluttermoji/fluttermoji.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:rehnuma/appvariables.dart';
@@ -83,7 +84,6 @@ class CenterWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: 120.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -114,6 +114,7 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
+  late FluttermojiController fluttermojiController;
   int widgetCount = 0;
   int progressBarIndex = 1;
   final formKey = GlobalKey<FormState>();
@@ -192,7 +193,7 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
       acutalWidget: GenderWidget(),
     ),
     CenterWidget(
-      height: 450.0,
+      height: 450,
       question: 'Long-term Goal',
       questionDesc: 'What would you like to improve in your life?',
       acutalWidget: GoalCards(),
@@ -208,6 +209,8 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
   @override
   void initState() {
     super.initState();
+    fluttermojiController = FluttermojiController();
+    fluttermojiController.init();
     authController = Get.put(AuthController());
   }
 
@@ -224,8 +227,7 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
         "date": selectedDate,
         "gender": GenderWidget().gender,
         "goal": GoalCards().goal,
-        // IMPORTANT: deeply analyze fluttermoji example from github... and use of FluttermojiSaveWidget()
-        // "dp": ChooseAvatar().saveDp()
+        
       }).then((res) {
         Navigator.pushReplacement(
           context,
@@ -315,11 +317,18 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
                     widgetCount == 5
                         ? GestureDetector(
                       onTap: () async {
+                        if(AppVariables.imageString == ""){
+                          setState(() {
+                            AppVariables.imageString = fluttermojiController.fluttermoji.value;
+                          });
+                        }
                         final userMap = {
                           'email': emailController.text,
                           'name': nameController.text,
                           'gender': AppVariables.selectedGender,
                           'goal': AppVariables.selectedGoal,
+                          'date': selectedDate,
+                          'emoji':AppVariables.imageString
                           // 'uid' : AppVariables.auth.,
                         };
                         var done = await authController.signUpWithEmailAndPassword(
@@ -388,16 +397,7 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
                 progressBarIndex++;
                 widgetCount++;
               } else if (widgetCount == 5 && progressBarIndex == 6) {
-                if (formKey.currentState!.validate()) {
-                  registerToFirebase();
-                }
-                print('registered to fireabse');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PersonalizeApp(),
-                  ),
-                );
+
               } else if (widgetCount > 5 && progressBarIndex > 6) {
                 widgetCount--;
                 progressBarIndex--;

@@ -1,8 +1,13 @@
+
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermoji/fluttermoji.dart';
-import 'package:flutter/foundation.dart' show TargetPlatform;
+import 'package:flutter/foundation.dart' show ByteData, TargetPlatform, Uint8List;
 import 'package:rehnuma/constants.dart';
+
+import '../appvariables.dart';
 
 class ChooseAvatar extends StatefulWidget {
   void saveDp() {
@@ -14,6 +19,19 @@ class ChooseAvatar extends StatefulWidget {
 }
 
 class _ChooseAvatarState extends State<ChooseAvatar> {
+  late FluttermojiCircleAvatar fluttermojiCircleAvatar;
+  late FluttermojiController fluttermojiController;
+  late String val;
+
+  @override
+  void initState() {
+    val = "";
+    fluttermojiCircleAvatar = FluttermojiCircleAvatar(backgroundColor: Colors.grey[200],
+      radius: 100,);
+    fluttermojiController = FluttermojiController();
+    fluttermojiController.init();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,10 +39,7 @@ class _ChooseAvatarState extends State<ChooseAvatar> {
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
         children: <Widget>[
-          FluttermojiCircleAvatar(
-            backgroundColor: Colors.grey[200],
-            radius: 100,
-          ),
+          fluttermojiCircleAvatar,
           SizedBox(
             height: 30,
           ),
@@ -80,8 +95,13 @@ class _ChooseAvatarState extends State<ChooseAvatar> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  onPressed: () {
-                    widget.saveDp();
+                  onPressed: () async{
+                    var v = fluttermojiController.getFluttermojiFromOptions();
+                    AppVariables.imageString = v;
+                    // var f = await svgToPng(context, val, svgWidth: 300, svgHeight: 300);
+                    // print(f);
+
+                    // widget.saveDp();
                   },
                 ),
               ],
@@ -129,6 +149,7 @@ class NewPage extends StatelessWidget {
             child: FluttermojiCustomizer(
               scaffoldHeight: 310,
               autosave: true,
+
               scaffoldWidth: isWeb ? 600 : 0,
             ),
           ),

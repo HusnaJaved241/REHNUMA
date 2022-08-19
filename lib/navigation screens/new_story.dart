@@ -5,8 +5,9 @@ import 'package:rehnuma/navigation%20screens/qassas_screen.dart';
 import '../constants.dart';
 
 class newStory extends StatelessWidget {
-  // const newStory({Key? key}) : super(key: key);
+  newStory({Key? key, required this.index}) : super(key: key);
   List qassas = qassasList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -44,32 +45,52 @@ class newStory extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  qassas[0].name,
+                  qassas[index].name,
                   style: kQuestionTextStyle,
                 ),
                 Text(
                   'Introduction',
-                  style: kBigWhiteTextStyle,
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      decoration: TextDecoration.underline,
+                      // fontFamily: 'SukarBlack',
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  qassas[1].introduction,
-                  style: kWhiteTextStyle,
+                  qassas[index].introduction,
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colors.black87,
+                  ),
                 ),
                 Text(
                   'Story',
-                  style: kBigWhiteTextStyle,
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  qassas[1].story,
-                  style: kWhiteTextStyle,
+                  qassas[index].story,
+                  style: TextStyle(fontSize: 22.0, color: Colors.black87),
                 ),
                 Text(
                   'Mentioned in Quran',
-                  style: kBigWhiteTextStyle,
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.black,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
-                  qassas[1].hawala,
-                  style: kWhiteTextStyle,
+                  qassas[index].hawala,
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colors.black87,
+                  ),
                 ),
               ],
             ),
