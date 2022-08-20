@@ -60,7 +60,7 @@ class _TherapyDetailScreenState extends State<TherapyDetailScreen> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/Background.jpg'),
+              image: AssetImage(bgImage),
               fit: BoxFit.cover),
         ),
         child: SafeArea(

@@ -9,8 +9,6 @@ import 'package:rehnuma/screens/home_screen.dart';
 import '../navigation screens/therapy_screen.dart';
 
 class MoreScreen extends StatelessWidget {
-  FocusNode focusNode = FocusNode();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,82 +29,79 @@ class MoreScreen extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          SearchBar(
-            focusNode: focusNode,
-          ),
-        ],
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 15.0),
-            child: Text(
-              'More',
-              style: kQuestionTextStyle,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Text(
+                'More',
+                style: kQuestionTextStyle,
+              ),
             ),
-          ),
-          Column(
-            children: [
-              IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ImagewithLabel(
-                        assetName: 'assets/images/Dua2.png',
-                        title: 'Dua',
-                        newScreen: DuaScreen(),
+            Column(
+              children: [
+                IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ImagewithLabel(
+                          assetName: 'assets/images/Dua2.png',
+                          title: 'Dua',
+                          newScreen: DuaScreen(),
+                        ),
                       ),
-                    ),
-                    VerticalDivider(
-                      color: Colors.grey,
-                      thickness: 1.0,
-                      indent: 20.0,
-                    ),
-                    Expanded(
-                      child: ImagewithLabel(
-                        assetName: 'assets/images/zikr.png',
-                        title: 'Zikr',
-                        newScreen: ZikarScreen(),
+                      VerticalDivider(
+                        color: Colors.grey,
+                        thickness: 1.0,
+                        indent: 20.0,
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: ImagewithLabel(
+                          assetName: 'assets/images/zikr.png',
+                          title: 'Zikr',
+                          newScreen: ZikarScreen(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Divider(
-                indent: 20.0,
-                endIndent: 20.0,
-                color: Colors.grey,
-                thickness: 1.0,
-              ),
-              IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ImagewithLabel(
-                        assetName: 'assets/images/qassas-ul-anbiya.png',
-                        title: 'Qassas-ul-Anbiya',
-                        newScreen: QassasScreen(),
-                      ),
-                    ),
-                    VerticalDivider(
-                      endIndent: 20.0,
-                      color: Colors.grey,
-                      thickness: 2.0,
-                    ),
-                    Expanded(
-                      child: ImagewithLabel(
-                        assetName: 'assets/images/therapies.png',
-                        title: 'Therapies',
-                        newScreen: TherapyScreen(),
-                      ),
-                    ),
-                  ],
+                Divider(
+                  indent: 20.0,
+                  endIndent: 20.0,
+                  color: Colors.grey,
+                  thickness: 1.0,
                 ),
-              ),
-            ],
-          ),
-        ],
+                IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ImagewithLabel(
+                          assetName: 'assets/images/qassas-ul-anbiya.png',
+                          title: 'Qassas-ul-Anbiya',
+                          newScreen: QassasScreen(),
+                        ),
+                      ),
+                      VerticalDivider(
+                        endIndent: 20.0,
+                        color: Colors.grey,
+                        thickness: 2.0,
+                      ),
+                      Expanded(
+                        child: ImagewithLabel(
+                          assetName: 'assets/images/therapies.png',
+                          title: 'Therapies',
+                          newScreen: TherapyScreen(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -142,7 +137,7 @@ class ImagewithLabel extends StatelessWidget {
               // width: currentWidth * .05,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
-                color: Colors.amber,
+                color: Color.fromARGB(255, 233, 226, 226),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),

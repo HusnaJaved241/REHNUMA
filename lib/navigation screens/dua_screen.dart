@@ -17,11 +17,7 @@ class DuaScreen extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          actions: [
-            SearchBar(
-              focusNode: focusNode,
-            ),
-          ],
+         
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
@@ -43,7 +39,7 @@ class DuaScreen extends StatelessWidget {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Background.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(

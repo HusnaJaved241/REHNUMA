@@ -242,79 +242,19 @@ class _Card2State extends State<Card2> with GetSnack {
           children: [
             GestureDetector(
               onTap: () {
-                // if (getEmotion(getTodayDate(), performaController.dates)
-                //     .isEmpty) {
-                //   Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) => TodayPerformaScreen()));
-                // } else {
-                //   showSnackBar(
-                //     title: "Performa filled",
-                //     msg: "You have already filled your performa",
-                //   );
-                // }
-                var currentWidth = MediaQuery.of(context).size.width;
-                var currentHeight = MediaQuery.of(context).size.height;
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        contentPadding: const EdgeInsets.all(0.0),
-                        insetPadding: EdgeInsets.symmetric(
-                          horizontal: currentWidth * 0.02,
-                          vertical: currentHeight * 0.08,
-                        ),
-                        content: SizedBox(
-                          height: currentHeight * 0.9,
-                          width: currentWidth,
-                          child: Stack(
-                            children: [
-                              PDF(
-                                enableSwipe: true,
-                                pageFling: true,
-                                // fitEachPage: true,
-                                fitPolicy: FitPolicy.HEIGHT,
-
-                                onPageChanged: (int? current, int? total) =>
-                                    _pageCountController
-                                        .add('${current! + 1} - $total'),
-                                onViewCreated: (PDFViewController
-                                    pdfViewController) async {
-                                  _pdfViewController
-                                      .complete(pdfViewController);
-                                  final int currentPage =
-                                      await pdfViewController
-                                              .getCurrentPage() ??
-                                          0;
-                                  final int? pageCount =
-                                      await pdfViewController.getPageCount();
-                                  _pageCountController
-                                      .add('${currentPage + 1} - $pageCount');
-                                },
-                              ).fromAsset(
-                                "assets/pop_up/angry.pdf",
-                                errorWidget: (dynamic error) =>
-                                    Center(child: Text(error.toString())),
-                              ),
-                              Positioned(
-                                right: 0,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: Icon(
-                                    Icons.close,
-                                    color: Colors.purple,
-                                    size: 30.0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    });
+                if (getEmotion(getTodayDate(), performaController.dates)
+                    .isEmpty) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TodayPerformaScreen()));
+                } else {
+                  showSnackBar(
+                    title: "Performa filled",
+                    msg: "You have already filled your performa",
+                  );
+                }
+                
               },
               child: Container(
                 margin: const EdgeInsets.only(

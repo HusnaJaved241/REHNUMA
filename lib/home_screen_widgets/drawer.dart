@@ -15,6 +15,7 @@ import 'package:feedback/feedback.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../appvariables.dart';
+import '../navigation screens/weekly_emotion_prediction.dart';
 
 class BuildDrawer extends StatefulWidget {
   const BuildDrawer({Key? key}) : super(key: key);
@@ -92,6 +93,22 @@ class _BuildDrawerState extends State<BuildDrawer> {
                 ),
               ),
             ),
+            ListTile(
+              leading: Icon(Icons.edit_note_rounded),
+              title: Text(
+                'Your Week',
+                style: kQuestionDescStyle,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WeeklyEmotionPredictionScreen(),
+                  ),
+                );
+              },
+            ),
+           
             ListTile(
               leading: Icon(Icons.info_outline_rounded),
               title: Text(

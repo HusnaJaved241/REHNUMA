@@ -32,6 +32,7 @@ final kNormalBoldWhiteTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
   color: Colors.white,
 );
+
 final kWhiteTextStyle = TextStyle(
   fontSize: 20.0,
   color: Colors.white,
@@ -81,3 +82,5 @@ const kLinearGradient = LinearGradient(
     Color(0xffF9FE94),
   ],
 );
+
+const bgImage = "assets/images/Background.jpg";

@@ -18,37 +18,28 @@ class _QassasScreenState extends State<QassasScreen> {
   FocusNode focusNode = FocusNode();
 
   List qassas = qassasList;
-  // var searchedQissa = [];
+  List searchedNames = [];
   @override
   void initState() {
     // TODO: implement initState
-    // searchedQissa = qassas;
+    setState(() {
+      searchedNames = qassas;
+    });
     super.initState();
   }
 
-  void searchString(String query) {
-    var results = [];
+  searchString(String query) {
     if (query.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      setState(() {
-        results = qassasList;
-      });
+      return;
     } else {
-      results = qassas.where((element) {
-        final name = element.name.toLowerCase();
-        final input = query.toLowerCase();
-        return name.contains(input);
-      }).toList();
       setState(() {
-        qassas = results;
+        searchedNames = qassas.where((element) {
+          final name = element.name.toLowerCase();
+          final input = query.toLowerCase();
+          return name.contains(input);
+        }).toList();
       });
-      // we use the toLowerCase() method to make it case-insensitive
     }
-    // final suggestions = qassas.where((element) {
-    //   final name = element.name.toLowerCase();
-    //   final input = query.toLowerCase();
-    //   return name.contains(input);
-    // }).toList();
   }
 
   @override
@@ -86,7 +77,7 @@ class _QassasScreenState extends State<QassasScreen> {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Background.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(
@@ -111,11 +102,11 @@ class _QassasScreenState extends State<QassasScreen> {
                   padding: const EdgeInsets.only(bottom: 12.0),
                   itemBuilder: (context, index, dynamic item) {
                     return CustomTileQassas(
-                      text: qassas[index].name,
+                      text: searchedNames[index].name,
                       index: index,
                     );
                   },
-                  itemCount: qassas.length,
+                  itemCount: searchedNames.length,
                 ),
               ),
             ),

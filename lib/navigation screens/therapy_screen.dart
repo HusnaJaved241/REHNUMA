@@ -10,9 +10,39 @@ import '../constants.dart';
 import '../home_screen_widgets/search_bar.dart';
 import 'dua_screen.dart';
 
-class TherapyScreen extends StatelessWidget {
+class TherapyScreen extends StatefulWidget {
+  @override
+  State<TherapyScreen> createState() => _TherapyScreenState();
+}
+
+class _TherapyScreenState extends State<TherapyScreen> {
   FocusNode focusNode = FocusNode();
+
+
   List therapyList = therapiesList;
+  List searchedTherapy = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    setState(() {
+      searchedTherapy = therapyList;
+    });
+    super.initState();
+  }
+
+  searchString(String query) {
+    if (query.isEmpty) {
+      return;
+    } else {
+      setState(() {
+        searchedTherapy = therapyList.where((element) {
+          final name = element.name.toLowerCase();
+          final input = query.toLowerCase();
+          return name.contains(input);
+        }).toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +54,7 @@ class TherapyScreen extends StatelessWidget {
           actions: [
             SearchBar(
               focusNode: focusNode,
+              searchString: searchString,
             ),
           ],
           backgroundColor: Colors.transparent,
@@ -47,7 +78,7 @@ class TherapyScreen extends StatelessWidget {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Background.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(
@@ -72,11 +103,11 @@ class TherapyScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 12.0),
                   itemBuilder: (context, index, dynamic item) {
                     return CustomTileTherapy(
-                      text: therapyList[index].name,
+                      text: searchedTherapy[index].name,
                       index: index,
                     );
                   },
-                  itemCount: therapyList.length,
+                  itemCount: searchedTherapy.length,
                 ),
               ),
             ),

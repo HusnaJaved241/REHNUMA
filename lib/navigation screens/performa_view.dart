@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:rehnuma/controllers/performa_controller.dart';
 
+import '../constants.dart';
 import '../mixins.dart';
 import '../screens/today_performa_screen.dart';
 
@@ -38,7 +39,7 @@ class _PerformaViewState extends State<PerformaView> with ProgressSpin {
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/images/Background.jpg'),
+                  image: AssetImage(bgImage),
                   fit: BoxFit.cover),
             ),
             child: SafeArea(

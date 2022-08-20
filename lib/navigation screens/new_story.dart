@@ -36,7 +36,7 @@ class newStory extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/Background.jpg'),
+              image: AssetImage(bgImage),
               fit: BoxFit.cover),
         ),
         child: SafeArea(

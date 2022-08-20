@@ -14,7 +14,29 @@ class MasnoonDuaScreen extends StatefulWidget {
 
 class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
   List masnoonDua = masnoonDuaList;
+  List searchedSupplication = [];
+
   FocusNode focusNode = FocusNode();
+  @override
+  void initState() {
+    setState(() {
+      searchedSupplication = masnoonDua;
+    });
+    super.initState();
+  }
+  searchString(String query) {
+    if (query.isEmpty) {
+      return;
+    } else {
+      setState(() {
+        searchedSupplication = masnoonDua.where((element) {
+          final name = element.name.toLowerCase();
+          final input = query.toLowerCase();
+          return name.contains(input);
+        }).toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +48,7 @@ class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
           actions: [
             SearchBar(
               focusNode: focusNode,
+              searchString: searchString,
             ),
           ],
           backgroundColor: Colors.transparent,
@@ -49,7 +72,7 @@ class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Background.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(
@@ -74,12 +97,12 @@ class _MasnoonDuaScreenState extends State<MasnoonDuaScreen> {
                   padding: const EdgeInsets.only(bottom: 12.0),
                   itemBuilder: (context, index, dynamic item) {
                     return AnimatedTile2(
-                      text: masnoonDua[index].name,
-                      dua: masnoonDua[index].dua,
-                      translation: masnoonDua[index].translation,
+                      text: searchedSupplication[index].name,
+                      dua: searchedSupplication[index].dua,
+                      translation: searchedSupplication[index].translation,
                     );
                   },
-                  itemCount: masnoonDua.length,
+                  itemCount: searchedSupplication.length,
                 ),
               ),
             ),

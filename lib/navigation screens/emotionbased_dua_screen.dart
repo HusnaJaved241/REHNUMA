@@ -7,10 +7,39 @@ import '../constants.dart';
 import '../home_screen_widgets/search_bar.dart';
 import 'masnoon_dua_screen.dart';
 
-class EmotionBasedDuaScreen extends StatelessWidget {
+class EmotionBasedDuaScreen extends StatefulWidget {
+  @override
+  State<EmotionBasedDuaScreen> createState() => _EmotionBasedDuaScreenState();
+}
+
+class _EmotionBasedDuaScreenState extends State<EmotionBasedDuaScreen> {
   FocusNode focusNode = FocusNode();
+
   List supplication = supplicationsList;
 
+  List searchedSupplication = [];
+
+  @override
+  void initState() {
+    setState(() {
+      searchedSupplication = supplication;
+    });
+    super.initState();
+  }
+
+searchString(String query) {
+    if (query.isEmpty) {
+      return;
+    } else {
+      setState(() {
+        searchedSupplication = supplication.where((element) {
+          final name = element.name.toLowerCase();
+          final input = query.toLowerCase();
+          return name.contains(input);
+        }).toList();
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,6 +50,7 @@ class EmotionBasedDuaScreen extends StatelessWidget {
           actions: [
             SearchBar(
               focusNode: focusNode,
+              searchString: searchString,
             ),
           ],
           backgroundColor: Colors.transparent,
@@ -44,7 +74,7 @@ class EmotionBasedDuaScreen extends StatelessWidget {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Background.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(
@@ -69,12 +99,12 @@ class EmotionBasedDuaScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 12.0),
                   itemBuilder: (context, index, dynamic item) {
                     return AnimatedTile2(
-                      text: supplication[index].name,
-                      dua: supplication[index].dua,
-                      translation: supplication[index].translation,
+                      text: searchedSupplication[index].name,
+                      dua: searchedSupplication[index].dua,
+                      translation: searchedSupplication[index].translation,
                     );
                   },
-                  itemCount: supplication.length,
+                  itemCount: searchedSupplication.length,
                 ),
               ),
             ),

@@ -28,6 +28,39 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
       Completer<PDFViewController>();
   StreamController<String> _pageCountController = StreamController<String>();
 
+  List emotionAssetList = [
+    'assets/pop_up/happy.pdf',
+    'assets/pop_up/sad.pdf',
+    'assets/pop_up/disgusted.pdf',
+    'assets/pop_up/fear.pdf',
+    'assets/pop_up/surprise.pdf',
+    'assets/pop_up/angry.pdf',
+  ];
+  String getEmotion(String emotion) {
+    switch (emotion) {
+      case "Happy":
+      case "happy":
+        return emotionAssetList[0];
+      case "Sad":
+      case "sad":
+        return emotionAssetList[1];
+      case "Disgusted":
+      case "disgusted":
+        return emotionAssetList[2];
+      case "Fear":
+      case "fear":
+        return emotionAssetList[3];
+      case "Surprise":
+      case "surprise":
+        return emotionAssetList[4];
+      case "Angry":
+      case "angry":
+        return emotionAssetList[5];
+      default:
+        return 'Nothing';
+    }
+  }
+
   String getDateDay(DateTime dateTime) {
     dynamic date = _dateFormatter.format(dateTime);
     final month = _monthFormatter.format(dateTime);
@@ -85,13 +118,13 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
           uid: FirebaseAuth.instance.currentUser!.uid,
           date: getDateDay(dateTime),
           dateTime: Timestamp.fromDate(dateTime));
-
       String success = await performaController.uploadPerforma(performaModel);
       if (success == 'success') {
         performaController.getAllPerformas();
         // the emotion based suggestional pop-up should be appeared here.
         var currentWidth = MediaQuery.of(context).size.width;
         var currentHeight = MediaQuery.of(context).size.height;
+
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -102,29 +135,34 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
                   vertical: currentHeight * 0.08,
                 ),
                 content: SizedBox(
-                  height: currentHeight * 0.58,
+                  height: currentHeight * 0.9,
                   width: currentWidth,
                   child: Stack(
                     children: [
-                     PDF(
-                    pageFling: false,
-                    fitEachPage: true,
-                    onPageChanged: (int? current, int? total) => _pageCountController
-                        .add('${current! + 1} - $total'),
-                    onViewCreated: (PDFViewController pdfViewController) async {
-                      _pdfViewController.complete(pdfViewController);
-                      final int currentPage =
-                          await pdfViewController.getCurrentPage() ?? 0;
-                      final int? pageCount =
-                          await pdfViewController.getPageCount();
-                      _pageCountController
-                          .add('${currentPage + 1} - $pageCount');
-                    },
-                  ).fromAsset(
-                    "assets/pop_up/angry.pdf",
-                    errorWidget: (dynamic error) =>
-                        Center(child: Text(error.toString())),
-                  ),
+                      PDF(
+                        enableSwipe: true,
+                        pageFling: true,
+                        // fitEachPage: true,
+                        fitPolicy: FitPolicy.HEIGHT,
+
+                        onPageChanged: (int? current, int? total) =>
+                            _pageCountController
+                                .add('${current! + 1} - $total'),
+                        onViewCreated:
+                            (PDFViewController pdfViewController) async {
+                          _pdfViewController.complete(pdfViewController);
+                          final int currentPage =
+                              await pdfViewController.getCurrentPage() ?? 0;
+                          final int? pageCount =
+                              await pdfViewController.getPageCount();
+                          _pageCountController
+                              .add('${currentPage + 1} - $pageCount');
+                        },
+                      ).fromAsset(
+                        getEmotion(emotion),
+                        errorWidget: (dynamic error) =>
+                            Center(child: Text(error.toString())),
+                      ),
                       Positioned(
                         right: 0,
                         child: IconButton(
@@ -143,6 +181,7 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
                 ),
               );
             });
+
         Navigator.pop(context);
       }
     }
@@ -188,7 +227,7 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
                 height: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/Background.jpg'),
+                      image: AssetImage(bgImage),
                       fit: BoxFit.cover),
                 ),
                 child: SafeArea(

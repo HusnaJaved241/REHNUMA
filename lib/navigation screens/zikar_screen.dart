@@ -22,11 +22,11 @@ class ZikarScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          actions: [
-            SearchBar(
-              focusNode: focusNode,
-            ),
-          ],
+          // actions: [
+          //   SearchBar(
+          //     focusNode: focusNode,
+          //   ),
+          // ],
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
@@ -48,7 +48,7 @@ class ZikarScreen extends StatelessWidget {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Background.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover),
           ),
           child: SafeArea(

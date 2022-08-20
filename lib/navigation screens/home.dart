@@ -16,19 +16,22 @@ class _HomeState extends State<Home> {
   List<DateModel> dates = [];
   final _dateFormatter = DateFormat('d');
   final _monthFormatter = DateFormat('MMM');
-  void getDates(){
+  void getDates() {
     for (int i = 0; i < 30; i++) {
       final date = DateTime.now().add(Duration(days: -i));
       final day = DateFormat('EEEE').format(date);
-      dates.add(DateModel(date: _dateFormatter.format(date),month: _monthFormatter.format(date),day: day));
+      dates.add(DateModel(
+          date: _dateFormatter.format(date),
+          month: _monthFormatter.format(date),
+          day: day));
     }
   }
+
   @override
   void initState() {
     getDates();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +54,10 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           actions: [
-            SearchBar(
-              focusNode: focusNode,
+            Container(
+            margin: EdgeInsets.all(4.0),
+              width: MediaQuery.of(context).size.width * 0.2,
+              child: Image.asset('assets/images/logo.png'),
             ),
           ],
         ),

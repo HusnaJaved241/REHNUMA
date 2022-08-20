@@ -46,8 +46,13 @@ class _DateRowState extends State<DateRow> {
               style: TextStyle(fontWeight: FontWeight.w400),
             ),
             Text(
-              widget.emotion.isEmpty ? "?" : widget.emotion,
-              style: TextStyle(fontWeight: FontWeight.w400),
+              widget.emotion.isEmpty
+                  ? "?"
+                  : widget.emotion[0].toUpperCase() +
+                      widget.emotion.substring(1),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ],
         ),
