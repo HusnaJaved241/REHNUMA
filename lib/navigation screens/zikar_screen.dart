@@ -125,7 +125,7 @@ class _AnimatedTile2ForZikrState extends State<AnimatedTile2ForZikr> {
             child: Container(
               alignment: Alignment.centerRight,
               decoration: BoxDecoration(
-                color: Color(0xffB788B7),
+                color:appColor,
                 borderRadius: BorderRadius.circular(
                   10.0,
                 ),

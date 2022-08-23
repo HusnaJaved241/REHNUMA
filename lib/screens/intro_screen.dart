@@ -43,8 +43,7 @@ String? pwdValidator(password) {
     return 'Please enter password';
   } else if (password.length < 6) {
     return 'Password length must be at least 6 characters';
-  }
-  else {
+  } else {
     return null;
   }
 }
@@ -70,11 +69,10 @@ class CenterWidget extends StatelessWidget {
     return Container(
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          20.0,
-        ),
-        color: appColor,
-      ),
+          borderRadius: BorderRadius.circular(
+            20.0,
+          ),
+          color: Colors.transparent),
       margin: const EdgeInsets.only(
         top: 30.0,
         left: 20.0,
@@ -113,7 +111,7 @@ class IntroScreen extends StatefulWidget {
   State<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
+class _IntroScreenState extends State<IntroScreen> with ProgressSpin, GetSnack {
   late FluttermojiController fluttermojiController;
   int widgetCount = 0;
   int progressBarIndex = 1;
@@ -150,7 +148,9 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
                 myController: emailController,
                 validator: emailValidator,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               CustomTextField(
                 hint: 'TYPE YOUR PASSWORD',
                 inputType: TextInputType.name,
@@ -159,8 +159,7 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
                 password: true,
               ),
             ],
-          )
-      ),
+          )),
     ),
     CenterWidget(
       height: 350.0,
@@ -176,13 +175,13 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
         locale: DatePicker.localeFromString('en'),
         onChange: (DateTime newDate, _) => selectedDate = newDate,
         pickerTheme: DateTimePickerTheme(
-          backgroundColor: appColor,
+          backgroundColor: Colors.transparent,
           itemTextStyle: TextStyle(
             color: Colors.black,
             fontSize: 25.0,
             fontWeight: FontWeight.w700,
           ),
-          dividerColor: Color(0xffebc014),
+          dividerColor: Color(0xff742d74),
         ),
       ),
     ),
@@ -227,7 +226,6 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
         "date": selectedDate,
         "gender": GenderWidget().gender,
         "goal": GoalCards().goal,
-        
       }).then((res) {
         Navigator.pushReplacement(
           context,
@@ -242,7 +240,7 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Error"),
+              title: Text("Credentials are not valid:("),
               content: Text(err.message),
               actions: [
                 TextButton(
@@ -260,17 +258,14 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appColor,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 0.0,
         actions: [
           Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -299,122 +294,153 @@ class _IntroScreenState extends State<IntroScreen>with ProgressSpin, GetSnack {
           ),
         ],
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus!.unfocus();
-        },
-        child: Obx((){
-          return Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Form(
-                      key: formKey,
-                      child: widgetList[widgetCount],
+      body: Container(
+        decoration: BoxDecoration(
+          image:
+              DecorationImage(image: AssetImage(bgImage2), fit: BoxFit.cover),
+        ),
+        child: SafeArea(
+          child: GestureDetector(
+            onTap: () {
+              FocusManager.instance.primaryFocus!.unfocus();
+            },
+            child: Obx(() {
+              return Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Form(
+                          key: formKey,
+                          child: widgetList[widgetCount],
+                        ),
+                        widgetCount == 5
+                            ? GestureDetector(
+                                onTap: () async {
+                                  if (AppVariables.imageString == "") {
+                                    setState(() {
+                                      AppVariables.imageString =
+                                          fluttermojiController
+                                              .fluttermoji.value;
+                                    });
+                                  }
+                                  final userMap = {
+                                    'email': emailController.text,
+                                    'name': nameController.text,
+                                    'gender': AppVariables.selectedGender,
+                                    'goal': AppVariables.selectedGoal,
+                                    'date': selectedDate,
+                                    'emoji': AppVariables.imageString
+                                    // 'uid' : AppVariables.auth.,
+                                  };
+                                  var done = await authController
+                                      .signUpWithEmailAndPassword(
+                                          emailController.text,
+                                          pwdController.text,
+                                          userMap);
+                                  if (done.toString() == "success") {
+                                    print("here");
+                                    showSnackBar(
+                                        title: "Register",
+                                        msg: "Successfully Registered");
+                                    Get.offAll(SignInScreen());
+                                  } else {
+                                    print("here");
+                                    showSnackBar(
+                                        title: "Failed", msg: done.toString());
+                                  }
+                                },
+                                child: Container(
+                                  width: Get.width * 0.5,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 22.0,
+                                    vertical: 15.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: kElevatedButtonColor,
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Register",
+                                      style: TextStyle(
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container()
+                      ],
                     ),
-                    widgetCount == 5
-                        ? GestureDetector(
-                      onTap: () async {
-                        if(AppVariables.imageString == ""){
-                          setState(() {
-                            AppVariables.imageString = fluttermojiController.fluttermoji.value;
-                          });
-                        }
-                        final userMap = {
-                          'email': emailController.text,
-                          'name': nameController.text,
-                          'gender': AppVariables.selectedGender,
-                          'goal': AppVariables.selectedGoal,
-                          'date': selectedDate,
-                          'emoji':AppVariables.imageString
-                          // 'uid' : AppVariables.auth.,
-                        };
-                        var done = await authController.signUpWithEmailAndPassword(
-                            emailController.text, pwdController.text, userMap);
-                        if(done.toString() == "success"){
-                          print("here");
-                          showSnackBar(title: "Register", msg: "Successfully Registered");
-                          Get.offAll(SignInScreen());
-                        }
-                        else{
-                          print("here");
-                          showSnackBar(title: "Failed", msg: done.toString());
-                        }
-                      },
-                      child: Container(
-                        width: Get.width * 0.5,
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                        decoration: BoxDecoration(color: Colors.white,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Center(child: Text("Register")),
-                      ),
-                    )
-                        : Container()
-                  ],
-                ),
-              ),
-              (authController.isLoading.value)
-                  ? Container(height: Get.height,width: Get.width,color: Colors.white.withOpacity(0.5),child: Center(child: showProgress()))
-                  : Container()
-            ],
-          );
-        }),
+                  ),
+                  (authController.isLoading.value)
+                      ? Container(
+                          height: Get.height,
+                          width: Get.width,
+                          color: Colors.white.withOpacity(0.5),
+                          child: Center(child: showProgress()))
+                      : Container()
+                ],
+              );
+            }),
+          ),
+        ),
       ),
       floatingActionButton: widgetCount == 5
           ? null
           : FloatingActionButton(
-        child: Icon(Icons.arrow_forward_ios),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        onPressed: () {
-          bool nextPage = true;
-          if (widgetCount == 0) {
-            if (!nameFormKey.currentState!.validate()) {
-              nextPage = false;
-            }
-          }
-          if (widgetCount == 1) {
-            if (!emailFormKey.currentState!.validate()) {
-              nextPage = false;
-            }
-          }
-          if (widgetCount == 3) {
-            if (AppVariables.selectedGender == "") {
-              nextPage = false;
-            }
-          }
-          if (widgetCount == 4) {
-            if (AppVariables.selectedGoal == "") {
-              nextPage = false;
-            }
-          }
-          if (nextPage) {
-            setState(() {
-              if (widgetCount < 5 && progressBarIndex < 6) {
-                progressBarIndex++;
-                widgetCount++;
-              } else if (widgetCount == 5 && progressBarIndex == 6) {
-
-              } else if (widgetCount > 5 && progressBarIndex > 6) {
-                widgetCount--;
-                progressBarIndex--;
-                if (formKey.currentState!.validate()) {
-                  registerToFirebase();
+              child: Icon(Icons.arrow_forward_ios),
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              onPressed: () {
+                bool nextPage = true;
+                if (widgetCount == 0) {
+                  if (!nameFormKey.currentState!.validate()) {
+                    nextPage = false;
+                  }
                 }
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PersonalizeApp(),
-                  ),
-                );
-              }
-            });
-          }
-        },
-      ),
+                if (widgetCount == 1) {
+                  if (!emailFormKey.currentState!.validate()) {
+                    nextPage = false;
+                  }
+                }
+                if (widgetCount == 3) {
+                  if (AppVariables.selectedGender == "") {
+                    nextPage = false;
+                  }
+                }
+                if (widgetCount == 4) {
+                  if (AppVariables.selectedGoal == "") {
+                    nextPage = false;
+                  }
+                }
+                if (nextPage) {
+                  setState(() {
+                    if (widgetCount < 5 && progressBarIndex < 6) {
+                      progressBarIndex++;
+                      widgetCount++;
+                    } else if (widgetCount == 5 && progressBarIndex == 6) {
+                    } else if (widgetCount > 5 && progressBarIndex > 6) {
+                      widgetCount--;
+                      progressBarIndex--;
+                      if (formKey.currentState!.validate()) {
+                        registerToFirebase();
+                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PersonalizeApp(),
+                        ),
+                      );
+                    }
+                  });
+                }
+              },
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       resizeToAvoidBottomInset: false,
     );

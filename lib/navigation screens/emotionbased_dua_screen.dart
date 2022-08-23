@@ -149,7 +149,7 @@ class _AnimatedTile2State extends State<AnimatedTile2> {
             }),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xffB788B7),
+                color: appColor,
                 borderRadius: BorderRadius.circular(
                   10.0,
                 ),

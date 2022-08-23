@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:rehnuma/constants.dart';
 import 'package:rehnuma/screens/home_screen.dart';
@@ -15,7 +14,10 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: kLinearGradient,
+        image: DecorationImage(
+          image: AssetImage(bgImage2),
+          fit: BoxFit.cover,
+        ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -73,14 +75,14 @@ class SignupScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SignupButton(
-                      text: 'Continue with Google',
-                      image: 'assets/images/google.png',
-                    ),
-                    SignupButton(
-                      text: 'Continue with Facebook',
-                      image: 'assets/images/fb.png',
-                    ),
+                    // SignupButton(
+                    //   text: 'Continue with Google',
+                    //   image: 'assets/images/google.png',
+                    // ),
+                    // SignupButton(
+                    //   text: 'Continue with Facebook',
+                    //   image: 'assets/images/fb.png',
+                    // ),
                     SignupButton(
                       text: 'Create Account',
                       image: 'assets/images/userr.png',
@@ -130,7 +132,7 @@ class SignupButton extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xffd7d9d6),
+          color: appColor,
         ),
         width: 300,
         height: 50,

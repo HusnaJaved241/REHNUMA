@@ -16,7 +16,7 @@ class _GoalCardsState extends State<GoalCards> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height * 0.4,
       child: SingleChildScrollView(
@@ -45,7 +45,7 @@ class _GoalCardsState extends State<GoalCards> {
                             shape: BoxShape.circle,
                             color: AppVariables.selectedGoal ==
                                     "Live a successful life"
-                                ? Colors.greenAccent
+                                ? kDrawerColor
                                 : Colors.transparent),
                         child: Center(
                             child: AppVariables.selectedGoal ==
@@ -76,7 +76,7 @@ class _GoalCardsState extends State<GoalCards> {
                             shape: BoxShape.circle,
                             color: AppVariables.selectedGoal ==
                                     "Become a better Muslim"
-                                ? Colors.greenAccent
+                                ? kDrawerColor
                                 : Colors.transparent),
                         child: Center(
                           child: AppVariables.selectedGoal ==
@@ -111,7 +111,7 @@ class _GoalCardsState extends State<GoalCards> {
                             shape: BoxShape.circle,
                             color: AppVariables.selectedGoal ==
                                     "Improve Relationships"
-                                ? Colors.greenAccent
+                                ? kDrawerColor
                                 : Colors.transparent),
                         child: Center(
                             child: AppVariables.selectedGoal ==
@@ -142,7 +142,7 @@ class _GoalCardsState extends State<GoalCards> {
                             shape: BoxShape.circle,
                             color: AppVariables.selectedGoal ==
                                     "Strengthen Faith & Patience"
-                                ? Colors.greenAccent
+                                ? kDrawerColor
                                 : Colors.transparent),
                         child: Center(
                             child: AppVariables.selectedGoal ==
@@ -203,7 +203,7 @@ class _GoalImagewithLabelState extends State<GoalImagewithLabel> {
             ),
             Text(
               widget.title,
-              style: kQuestionDescStyle,
+              style: kNormalTextStyle,
               textAlign: TextAlign.center,
             ),
           ],

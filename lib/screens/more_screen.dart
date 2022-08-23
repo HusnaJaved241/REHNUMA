@@ -12,7 +12,7 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appColor,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -30,77 +30,85 @@ class MoreScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Text(
-                'More',
-                style: kQuestionTextStyle,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(bgImage2),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text(
+                  'More',
+                  style: kQuestionTextStyle,
+                ),
               ),
-            ),
-            Column(
-              children: [
-                IntrinsicHeight(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ImagewithLabel(
-                          assetName: 'assets/images/Dua2.png',
-                          title: 'Dua',
-                          newScreen: DuaScreen(),
+              Column(
+                children: [
+                  IntrinsicHeight(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ImagewithLabel(
+                            assetName: 'assets/images/Dua2.png',
+                            title: 'Dua',
+                            newScreen: DuaScreen(),
+                          ),
                         ),
-                      ),
-                      VerticalDivider(
-                        color: Colors.grey,
-                        thickness: 1.0,
-                        indent: 20.0,
-                      ),
-                      Expanded(
-                        child: ImagewithLabel(
-                          assetName: 'assets/images/zikr.png',
-                          title: 'Zikr',
-                          newScreen: ZikarScreen(),
+                        VerticalDivider(
+                          color: Colors.grey,
+                          thickness: 1.0,
+                          indent: 20.0,
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: ImagewithLabel(
+                            assetName: 'assets/images/zikr.png',
+                            title: 'Zikr',
+                            newScreen: ZikarScreen(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Divider(
-                  indent: 20.0,
-                  endIndent: 20.0,
-                  color: Colors.grey,
-                  thickness: 1.0,
-                ),
-                IntrinsicHeight(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ImagewithLabel(
-                          assetName: 'assets/images/qassas-ul-anbiya.png',
-                          title: 'Qassas-ul-Anbiya',
-                          newScreen: QassasScreen(),
-                        ),
-                      ),
-                      VerticalDivider(
-                        endIndent: 20.0,
-                        color: Colors.grey,
-                        thickness: 2.0,
-                      ),
-                      Expanded(
-                        child: ImagewithLabel(
-                          assetName: 'assets/images/therapies.png',
-                          title: 'Therapies',
-                          newScreen: TherapyScreen(),
-                        ),
-                      ),
-                    ],
+                  Divider(
+                    indent: 20.0,
+                    endIndent: 20.0,
+                    color: Colors.grey,
+                    thickness: 1.0,
                   ),
-                ),
-              ],
-            ),
-          ],
+                  IntrinsicHeight(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ImagewithLabel(
+                            assetName: 'assets/images/qassas-ul-anbiya.png',
+                            title: 'Qassas-ul-Anbiya',
+                            newScreen: QassasScreen(),
+                          ),
+                        ),
+                        VerticalDivider(
+                          endIndent: 20.0,
+                          color: Colors.grey,
+                          thickness: 1.0,
+                        ),
+                        Expanded(
+                          child: ImagewithLabel(
+                            assetName: 'assets/images/therapies.png',
+                            title: 'Therapies',
+                            newScreen: TherapyScreen(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -133,19 +141,11 @@ class ImagewithLabel extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: currentHeight * .2,
-              // width: currentWidth * .05,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: Color.fromARGB(255, 233, 226, 226),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Image.asset(
-                  assetName,
-                  fit: BoxFit.fill,
-                  width: currentWidth * .5,
-                ),
+              height: currentHeight * 0.2,
+              child: Image.asset(
+                assetName,
+                fit: BoxFit.fill,
+                width: currentWidth * .5,
               ),
             ),
             Text(

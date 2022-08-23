@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rehnuma/models/date_with_emotion.dart';
@@ -30,6 +31,7 @@ class PerformaController extends GetxController {
       isLoading.value = true;
       var val = await performaCollectionReference
           .where("dateTime", isGreaterThan: Timestamp.fromDate(getDate()))
+      .where("uid",isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get();
       for (int i = 0; i < val.docs.length; i++) {
         PerformaModel performaModel = PerformaModel.fromJson(val.docs[i]);
@@ -59,7 +61,6 @@ class PerformaController extends GetxController {
       for (int i = 0; i < val.docs.length; i++) {
         performaModel.value = PerformaModel.fromJson(val.docs[i]);
       }
-
       return "success";
     } catch (e) {
       print(e);

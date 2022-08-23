@@ -18,7 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
       // margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Color(0xff34a855),
+          primary: kElevatedButtonColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(35.0),
           ),

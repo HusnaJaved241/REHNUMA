@@ -13,6 +13,34 @@ Color getColor(Set<MaterialState> states) {
   }
   return Color.fromARGB(255, 11, 54, 90);
 }
+final List<String> beABetterMuslim = [
+  "assets/images/be_a_better_muslim_a.png",
+  "assets/images/be_a_better_muslim_b.png",
+  "assets/images/be_a_better_muslim_c.png",
+  "assets/images/be_a_better_muslim_d.png",
+  "assets/images/be_a_better_muslim_e.png"
+];
+final List<String> improveRelationships = [
+  "assets/images/improve_relations_a.png",
+  "assets/images/improve_relations_b.png",
+  "assets/images/improve_relations_c.png",
+  "assets/images/improve_relations_d.png",
+  "assets/images/improve_relations_e.png"
+];
+final List<String> strongFaith = [
+  "assets/images/stong_faith_a.png",
+  "assets/images/stong_faith_b.png",
+  "assets/images/stong_faith_c.png",
+  "assets/images/stong_faith_d.png",
+  "assets/images/stong_faith_e.png",
+];
+final List<String> success = [
+  "assets/images/success_a.png",
+  "assets/images/success_b.png",
+  "assets/images/success_c.png",
+  "assets/images/success_d.png",
+  "assets/images/success_e.png",
+];
 
 final kTextColor = Color(0xff2A2A2A);
 
@@ -28,8 +56,8 @@ final kNormalTextStyle = TextStyle(
 );
 final kNormalBoldWhiteTextStyle = TextStyle(
   fontSize: 20.0,
-  fontFamily: 'SukarBlackRegular',
-  fontWeight: FontWeight.w500,
+  fontFamily: 'SukarBlack',
+  fontWeight: FontWeight.normal,
   color: Colors.white,
 );
 
@@ -70,7 +98,8 @@ final kTextFieldDecoration = InputDecoration(
 const kCard1TextStyle = TextStyle(
   fontSize: 18.0,
 );
-const appColor = Color(0xff9C77B8);
+const appColor = Color(0xffdbbcdd);
+// const appColor = Color(0xff9C77B8);
 // DFFF33  --> to be added in gradient
 const kLinearGradient = LinearGradient(
   begin: Alignment.topLeft,
@@ -82,5 +111,7 @@ const kLinearGradient = LinearGradient(
     Color(0xffF9FE94),
   ],
 );
-
+const kElevatedButtonColor = Color(0xffe5a9ca);
+const kDrawerColor = Color(0xffB788B7);
+const bgImage2 = "assets/images/background2.jpg";
 const bgImage = "assets/images/Background.jpg";

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rehnuma/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,9 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
   final firestoreInstance = FirebaseFirestore.instance;
   List<QuestionModel> sliderQuestion = [
     QuestionModel(question: "How good is the day today?", answer: 0.0),
-    QuestionModel(question: "How good is the day today?", answer: 0.0),
+    QuestionModel(
+        question: "How many positive thoughts you have in your head right now?",
+        answer: 0.0),
     QuestionModel(
         question: "How much is the workload manageable today?", answer: 0.0),
     QuestionModel(
@@ -143,7 +146,7 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
                         enableSwipe: true,
                         pageFling: true,
                         // fitEachPage: true,
-                        fitPolicy: FitPolicy.HEIGHT,
+                        fitPolicy: FitPolicy.WIDTH,
 
                         onPageChanged: (int? current, int? total) =>
                             _pageCountController
@@ -227,8 +230,7 @@ class _TodayPerformaScreenState extends State<TodayPerformaScreen>
                 height: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(bgImage),
-                      fit: BoxFit.cover),
+                      image: AssetImage(bgImage), fit: BoxFit.cover),
                 ),
                 child: SafeArea(
                   child: SingleChildScrollView(

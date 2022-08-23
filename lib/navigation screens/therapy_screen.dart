@@ -18,7 +18,6 @@ class TherapyScreen extends StatefulWidget {
 class _TherapyScreenState extends State<TherapyScreen> {
   FocusNode focusNode = FocusNode();
 
-
   List therapyList = therapiesList;
   List searchedTherapy = [];
   @override
@@ -77,9 +76,8 @@ class _TherapyScreenState extends State<TherapyScreen> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(bgImage),
-                fit: BoxFit.cover),
+            image:
+                DecorationImage(image: AssetImage(bgImage), fit: BoxFit.cover),
           ),
           child: SafeArea(
             child: SingleChildScrollView(
@@ -93,7 +91,7 @@ class _TherapyScreenState extends State<TherapyScreen> {
                   header: Container(
                     padding: const EdgeInsets.only(top: 7.0),
                     child: SelectableText(
-                      'Therapies',
+                      'Psychological Therapies',
                       style: kQuestionTextStyle,
                       textAlign: TextAlign.center,
                     ),
@@ -129,15 +127,17 @@ class CustomTileTherapy extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => TherapyDetailScreen(
-                      index: index,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => TherapyDetailScreen(
+              index: index,
+            ),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xffB788B7),
+          color: appColor,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Center(

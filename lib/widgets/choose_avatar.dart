@@ -45,64 +45,68 @@ class _ChooseAvatarState extends State<ChooseAvatar> {
           ),
           Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton.icon(
-                  icon: Icon(Icons.edit),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff34a855),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    icon: Icon(Icons.edit),
+                    style: ElevatedButton.styleFrom(
+                      primary: kElevatedButtonColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6.0,
+                        vertical: 17.0,
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6.0,
-                      vertical: 17.0,
+                    label: Text(
+                      'Customize',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  label: Text(
-                    'Customize',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NewPage(),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewPage(),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
                   width: 10.0,
                 ),
-                ElevatedButton.icon(
-                  icon: Icon(Icons.save),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff34a855),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    icon: Icon(Icons.save),
+                    style: ElevatedButton.styleFrom(
+                      primary: kElevatedButtonColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 36.0,
+                        vertical: 17.0,
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 36.0,
-                      vertical: 17.0,
+                    label: Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
+                    onPressed: () async{
+                      var v = fluttermojiController.getFluttermojiFromOptions();
+                      AppVariables.imageString = v;
+                      // var f = await svgToPng(context, val, svgWidth: 300, svgHeight: 300);
+                      // print(f);
+                
+                      // widget.saveDp();
+                    },
                   ),
-                  label: Text(
-                    'Save',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  onPressed: () async{
-                    var v = fluttermojiController.getFluttermojiFromOptions();
-                    AppVariables.imageString = v;
-                    // var f = await svgToPng(context, val, svgWidth: 300, svgHeight: 300);
-                    // print(f);
-
-                    // widget.saveDp();
-                  },
                 ),
               ],
             ),

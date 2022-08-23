@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: appColor,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           leading: GestureDetector(
             onTap: () {
@@ -55,52 +55,57 @@ class _HomeState extends State<Home> {
           elevation: 0.0,
           actions: [
             Container(
-            margin: EdgeInsets.all(4.0),
+              margin: EdgeInsets.all(4.0),
               width: MediaQuery.of(context).size.width * 0.2,
               child: Image.asset('assets/images/logo.png'),
             ),
           ],
         ),
         body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(bgImage2),
+              fit: BoxFit.cover
+            ),
+          ),
           height: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              // have to fix the expanded widget in this way this is not gonna work
-              // will have to ask someone how to fix this
-              // leave this for now
-              Expanded(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: HomeCard(
-                        // height: 115.0,
-                        child: Card1(),
+          child: SafeArea(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10.0,
                       ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: HomeCard(
-                        // height: 160.0,
-                        child: Card2(dates: dates.reversed.toList()),
+                      Expanded(
+                        flex: 2,
+                        child: HomeCard(
+                          // height: 115.0,
+                          child: Card1(),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: HomeCard(
-                        // height: 185.0,
-                        child: Card3(),
+                      Expanded(
+                        flex: 3,
+                        child: HomeCard(
+                          // height: 160.0,
+                          child: Card2(dates: dates.reversed.toList()),
+                        ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        flex: 3,
+                        child: HomeCard(
+                          // height: 185.0,
+                          child: Card3(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

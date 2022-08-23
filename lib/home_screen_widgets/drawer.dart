@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 import 'package:rehnuma/constants.dart';
 import 'package:rehnuma/controllers/auth_controller.dart';
 import 'package:rehnuma/screens/about_us.dart';
+import 'package:rehnuma/screens/faq_screen.dart';
+import 'package:rehnuma/screens/update_profile.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:feedback/feedback.dart';
 import 'package:path_provider/path_provider.dart';
@@ -44,7 +46,7 @@ class _BuildDrawerState extends State<BuildDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.68,
-      backgroundColor: Color(0xffBE7FB0),
+      backgroundColor: kDrawerColor,
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,17 +70,25 @@ class _BuildDrawerState extends State<BuildDrawer> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * .12,
-                        width: MediaQuery.of(context).size.width * .5,
-                        decoration: BoxDecoration(
-                            color: Colors.teal, shape: BoxShape.circle),
-                        child: Center(
-                          child: SvgPicture.string(
-                            AppVariables.box.read("image"),
-                            fit: BoxFit.fill,
-                            height: MediaQuery.of(context).size.height * .12,
-                            width: MediaQuery.of(context).size.width * .5,
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UpdateProfile(),
+                          ),
+                        ),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * .12,
+                          width: MediaQuery.of(context).size.width * .5,
+                          // decoration: BoxDecoration(
+                          //     color: Color.fromARGB(255, 223, 208, 122), shape: BoxShape.circle),
+                          child: Center(
+                            child: SvgPicture.string(
+                              AppVariables.box.read("image"),
+                              fit: BoxFit.cover,
+                              height: MediaQuery.of(context).size.height * .12,
+                              width: MediaQuery.of(context).size.width * .5,
+                            ),
                           ),
                         ),
                       ),
@@ -108,7 +118,6 @@ class _BuildDrawerState extends State<BuildDrawer> {
                 );
               },
             ),
-           
             ListTile(
               leading: Icon(Icons.info_outline_rounded),
               title: Text(
@@ -151,7 +160,10 @@ class _BuildDrawerState extends State<BuildDrawer> {
                   final Email email = Email(
                     body: p0.text,
                     subject: 'REHNUMA Feedback',
-                    recipients: ['husna.bsse3670@iiu.edu.pk', 'maham.bsse3666@iiu.edu.pk'],
+                    recipients: [
+                      'husna.bsse3670@iiu.edu.pk',
+                      'maham.bsse3666@iiu.edu.pk'
+                    ],
                     // cc: ['cc@example.com'],
                     // bcc: ['bcc@example.com'],
                     attachmentPaths: ['${tempDir.path}/image.png'],
@@ -167,12 +179,17 @@ class _BuildDrawerState extends State<BuildDrawer> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text(
-                'Settings',
-                style: kQuestionDescStyle,
-              ),
-            ),
+                leading: Icon(Icons.question_mark_rounded),
+                title: Text(
+                  "FAQ\'s",
+                  style: kQuestionDescStyle,
+                ),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FAQScreen(),
+                      ),
+                    )),
             ListTile(
               leading: Icon(Icons.logout_outlined),
               onTap: () {

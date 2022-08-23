@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rehnuma/screens/home_screen.dart';
+import 'package:rehnuma/screens/more_screen.dart';
 import 'package:rehnuma/screens/signin_screen.dart';
 import 'package:rehnuma/screens/signup_screen.dart';
 
@@ -10,7 +11,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-        User? result = FirebaseAuth.instance.currentUser;
+  User? result = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -18,8 +19,14 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 5), () {
       print("After 3 seconds");
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) =>  result!=null ? HomeScreen():  SignInScreen()));
-    }); 
+        context,
+        MaterialPageRoute(
+          builder: (context) => FirebaseAuth.instance.currentUser != null
+              ? HomeScreen()
+              : SignInScreen(),
+        ),
+      );
+    });
 
     super.initState();
   }
@@ -28,11 +35,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Image.asset(
-          'assets/images/16.jpg',
+          'assets/images/splash.jpeg',
           fit: BoxFit.cover,
         ),
       ),

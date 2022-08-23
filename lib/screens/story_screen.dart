@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rehnuma/constants.dart';
 import 'package:rehnuma/screens/signup_screen.dart';
+import 'package:rehnuma/widgets/elevated_button.dart';
 import 'package:story_view/story_view.dart';
 
 class StoryPage extends StatefulWidget {
@@ -11,14 +12,22 @@ class StoryPage extends StatefulWidget {
 class _StoryPageState extends State<StoryPage> {
   final storyController = StoryController();
   var storyItems = [
-    StoryItem.pageProviderImage(AssetImage('assets/images/17.jpg'),
-        imageFit: BoxFit.cover),
-    StoryItem.pageProviderImage(AssetImage('assets/images/18.jpg'),
-        imageFit: BoxFit.cover),
-    StoryItem.pageProviderImage(AssetImage('assets/images/19.jpg'),
-        imageFit: BoxFit.cover),
-    StoryItem.pageProviderImage(AssetImage('assets/images/20.jpg'),
-        imageFit: BoxFit.cover),
+    StoryItem.pageProviderImage(
+      AssetImage('assets/story_screens/1.jpg'),
+      imageFit: BoxFit.fill,
+    ),
+    StoryItem.pageProviderImage(
+      AssetImage('assets/story_screens/2.jpg'),
+      imageFit: BoxFit.fill,
+    ),
+    StoryItem.pageProviderImage(
+      AssetImage('assets/story_screens/3.jpg'),
+      imageFit: BoxFit.fill,
+    ),
+    StoryItem.pageProviderImage(
+      AssetImage('assets/story_screens/4.jpg'),
+      imageFit: BoxFit.fill,
+    ),
   ];
   @override
   void dispose() {
@@ -50,22 +59,9 @@ class _StoryPageState extends State<StoryPage> {
           ),
           Positioned(
             bottom: 45.0,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xff34a855),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                  vertical: 17.0,
-                ),
-              ),
-              child: Text(
-                'GET STARTED',
-                style: kQuestionDescStyle,
-              ),
-              onPressed: () => Navigator.push(  
+            child: CustomElevatedButton(
+              btnName: 'GET STARTED',
+              onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SignupScreen(),

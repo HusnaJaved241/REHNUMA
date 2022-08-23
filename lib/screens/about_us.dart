@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rehnuma/constants.dart';
 
+import 'home_screen.dart';
+
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({Key? key}) : super(key: key);
 
@@ -11,8 +13,25 @@ class AboutUsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColor,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: appColor,
-          title: Text('About Us'),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 27.0,
+            ),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            ),
+          ),
+          title: Text(
+            'About Us',
+            style: kQuestionDescStyle,
+          ),
           bottom: TabBar(
             indicatorColor: Colors.black,
             labelColor: Colors.black,
@@ -97,6 +116,7 @@ class DevelopersWidget extends StatelessWidget {
             child: customContainer(
               name: 'Husna Javed',
               regNo: 3670,
+              mailName: "husna",
             ),
           ),
           Positioned(
@@ -107,6 +127,7 @@ class DevelopersWidget extends StatelessWidget {
             child: customContainer(
               name: 'Maham Shehzadi',
               regNo: 3666,
+              mailName: "maham",
             ),
           ),
           Positioned(
@@ -153,10 +174,15 @@ class customRow extends StatelessWidget {
 }
 
 class customContainer extends StatelessWidget {
-  const customContainer({Key? key, required this.name, required this.regNo})
+  const customContainer(
+      {Key? key,
+      required this.name,
+      required this.regNo,
+      required this.mailName})
       : super(key: key);
   final name;
   final regNo;
+  final mailName;
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +209,7 @@ class customContainer extends StatelessWidget {
           customRow(icon: Icons.school, text: 'BS Software Engineering'),
           customRow(icon: Icons.location_city_outlined, text: 'IIUI'),
           customRow(icon: Icons.location_on, text: 'Islamabad'),
-          customRow(icon: Icons.email, text: 'husna.bsse$regNo@iiu.edu.pk'),
+          customRow(icon: Icons.email, text: '$mailName.bsse$regNo@iiu.edu.pk'),
         ],
       ),
     );

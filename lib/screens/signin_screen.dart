@@ -100,7 +100,10 @@ class _SignInScreenState extends State<SignInScreen>
         children: [
           Container(
             decoration: BoxDecoration(
-              gradient: kLinearGradient,
+              image: DecorationImage(
+                image: AssetImage(bgImage2),
+                fit: BoxFit.cover
+              ),
             ),
             child: SafeArea(
               child: GestureDetector(

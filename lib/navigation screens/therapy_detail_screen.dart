@@ -59,65 +59,41 @@ class _TherapyDetailScreenState extends State<TherapyDetailScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(bgImage),
-              fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage(bgImage), fit: BoxFit.cover),
         ),
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  therpy[widget.index].name,
-                  style: kQuestionTextStyle,
-                  textAlign: TextAlign.center,
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .6,
+                width: MediaQuery.of(context).size.width,
+                child: PDF(
+                  // swipeHorizontal: true,
+                  pageFling: false,
+                  fitEachPage: true,
+                  onPageChanged: (int? current, int? total) => widget
+                      ._pageCountController
+                      .add('${current! + 1} - $total'),
+                  onViewCreated: (PDFViewController pdfViewController) async {
+                    widget._pdfViewController.complete(pdfViewController);
+                    final int currentPage =
+                        await pdfViewController.getCurrentPage() ?? 0;
+                    final int? pageCount =
+                        await pdfViewController.getPageCount();
+                    widget._pageCountController
+                        .add('${currentPage + 1} - $pageCount');
+                  },
+                ).fromAsset(
+                  therpy[widget.index].pdfPath,
+                  errorWidget: (dynamic error) =>
+                      Center(child: Text(error.toString())),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .58,
-                  width: MediaQuery.of(context).size.width,
-                  child: PDF(
+              ),
 
-                    // enableSwipe: true,
-                    // swipeHorizontal: true,
-                    // autoSpacing: true,
-                    pageFling: false,
-                    fitEachPage: true,
-                    onPageChanged: (int? current, int? total) => widget
-                        ._pageCountController
-                        .add('${current! + 1} - $total'),
-                    onViewCreated: (PDFViewController pdfViewController) async {
-                      widget._pdfViewController.complete(pdfViewController);
-                      final int currentPage =
-                          await pdfViewController.getCurrentPage() ?? 0;
-                      final int? pageCount =
-                          await pdfViewController.getPageCount();
-                      widget._pageCountController
-                          .add('${currentPage + 1} - $pageCount');
-                    },
-                  ).fromAsset(
-                    therpy[widget.index].pdfPath,
-                    errorWidget: (dynamic error) =>
-                        Center(child: Text(error.toString())),
-                  ),
-                ),
-                // SizedBox(
-                //   height: MediaQuery.of(context).size.height * .8,
-                //   child: PdfViewer.openAsset(
-                //     'assets/therapies.pdf',
-                //     viewerController: widget.controller,
-                //     onError: (err) => print(err),
-                //     params: const PdfViewerParams(
-                //       padding: 2,
-                //       minScale: 1.0,
-
-                //       // scrollDirection: Axis.horizontal,
-                //     ),
-                //   ),
-                // ),
-              ],
-            ),
+            ],
           ),
         ),
       ),

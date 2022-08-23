@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import 'package:rehnuma/models/date_with_emotion.dart';
 import 'package:rehnuma/navigation%20screens/performa_view.dart';
 import 'package:rehnuma/screens/today_performa_screen.dart';
 
+import '../appvariables.dart';
 import '../widgets/date_row.dart';
 
 class HomeCard extends StatefulWidget {
@@ -127,12 +129,6 @@ class Card2 extends StatefulWidget {
 }
 
 class _Card2State extends State<Card2> with GetSnack {
-  @override
-  void dispose() {
-    performaController.dispose();
-    super.dispose();
-  }
-
   ScrollController _controller = ScrollController();
   String selectedDate = '';
   Color color = Colors.transparent;
@@ -164,6 +160,8 @@ class _Card2State extends State<Card2> with GetSnack {
     }
     return '';
   }
+
+  
 
   String getTodayDate() {
     int index = widget.dates.length - 1;
@@ -220,9 +218,7 @@ class _Card2State extends State<Card2> with GetSnack {
           _controller
               .animateTo(_controller.position.maxScrollExtent,
                   duration: Duration(milliseconds: 700), curve: Curves.easeIn)
-              .then((value) {
-            setState(() {});
-          });
+              .then((value) {});
         }
       }
     }
@@ -254,7 +250,6 @@ class _Card2State extends State<Card2> with GetSnack {
                     msg: "You have already filled your performa",
                   );
                 }
-                
               },
               child: Container(
                 margin: const EdgeInsets.only(
@@ -291,37 +286,37 @@ class _Card2State extends State<Card2> with GetSnack {
   }
 }
 
-Widget dateWithEmotionContainer() {
-  return Container(
-    padding: const EdgeInsets.symmetric(
-      horizontal: 3.0,
-      vertical: 5.0,
-    ),
-    margin: const EdgeInsets.symmetric(
-      horizontal: 4.0,
-      vertical: 8.0,
-    ),
-    decoration: BoxDecoration(
-      border: Border.all(width: 2.0),
-      borderRadius: BorderRadius.circular(8.0),
-    ),
-    child: Column(
-      children: [
-        Text(
-          '29 Jan',
-          style: kCard1TextStyle,
-        ),
-        Text(
-          'Angry',
-          style: kCard1TextStyle,
-        ),
-      ],
-    ),
-  );
+class Card3 extends StatefulWidget {
+  const Card3({Key? key}) : super(key: key);
+
+  @override
+  State<Card3> createState() => _Card3State();
 }
 
-class Card3 extends StatelessWidget {
-  const Card3({Key? key}) : super(key: key);
+class _Card3State extends State<Card3> {
+  List<String> getPaths(String goal) {
+    if (goal == 'Live a successful life') {
+      return success;
+    } else if (goal == 'Become a better Muslim') {
+      return beABetterMuslim;
+    } else if (goal == 'Improve Relationships') {
+      return improveRelationships;
+    } else {
+      return strongFaith;
+    }
+  }
+
+  List<Widget> getItems() {
+    List<Widget> list = [];
+    String goal = AppVariables.box.read("goal");
+    List<String> paths = getPaths(goal);
+    for (int i = 0; i < paths.length; i++) {
+      list.add(
+        ImageWid(path: paths[i]),
+      );
+    }
+    return list;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -330,12 +325,35 @@ class Card3 extends StatelessWidget {
       //   borderRadius: BorderRadius.circular(10.0)
       // ),
       padding: const EdgeInsets.all(8.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Image(
-          fit: BoxFit.fill,
-          image: AssetImage('assets/images/ayat1.jpeg'),
+      child: CarouselSlider(
+        items: getItems(),
+        options: CarouselOptions(
+          autoPlay: true,
+          enlargeCenterPage: true,
+          autoPlayInterval: Duration(seconds: 10),
+          viewportFraction: 0.9,
+          aspectRatio: 2.0,
+          initialPage: 2,
         ),
+      ),
+    );
+  }
+}
+
+class ImageWid extends StatelessWidget {
+  const ImageWid({
+    Key? key,
+    required this.path,
+  }) : super(key: key);
+  final String path;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10.0),
+      child: Image(
+        fit: BoxFit.fill,
+        image: AssetImage(path),
       ),
     );
   }

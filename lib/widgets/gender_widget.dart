@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rehnuma/appvariables.dart';
+import 'package:rehnuma/constants.dart';
 
 Widget buttonStyle(String gender, Color color, Function() onPressed) {
   return GestureDetector(
@@ -59,7 +60,7 @@ class _GenderWidgetState extends State<GenderWidget> {
             ),
             Container(height: 25,width: 25, decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppVariables.selectedGender == "MALE"?Colors.greenAccent:Colors.transparent
+                color: AppVariables.selectedGender == "MALE"?appColor:Colors.transparent
             ),
               child: Center(child: AppVariables.selectedGender == "MALE"?Icon(Icons.check):Container()),
             )
@@ -78,7 +79,7 @@ class _GenderWidgetState extends State<GenderWidget> {
             }),
             Container(height: 25,width: 25, decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppVariables.selectedGender == "FEMALE"?Colors.greenAccent:Colors.transparent
+                color: AppVariables.selectedGender == "FEMALE"?appColor:Colors.transparent
             ),
               child: Center(child: AppVariables.selectedGender == "FEMALE"?Icon(Icons.check):Container()),
             )
@@ -86,7 +87,7 @@ class _GenderWidgetState extends State<GenderWidget> {
         ),
         Stack(
           children: [
-            buttonStyle('OTHER', Color(0xff31a751), () {
+            buttonStyle('OTHER', Color(0xff742d74), () {
               setState(() {
                 widget.gender = 'Other';
                   print(widget.gender);
@@ -95,7 +96,7 @@ class _GenderWidgetState extends State<GenderWidget> {
             }),
             Container(height: 25,width: 25, decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppVariables.selectedGender == "OTHER"?Colors.greenAccent:Colors.transparent
+                color: AppVariables.selectedGender == "OTHER"?appColor:Colors.transparent
             ),
               child: Center(child: AppVariables.selectedGender == "OTHER"?Icon(Icons.check):Container()),
             )

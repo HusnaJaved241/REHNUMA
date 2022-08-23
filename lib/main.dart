@@ -13,6 +13,7 @@ import 'package:rehnuma/screens/practice_expansion.dart';
 import 'package:rehnuma/screens/signin_screen.dart';
 import 'package:rehnuma/screens/signup_screen.dart';
 import 'package:rehnuma/screens/splash_screen.dart';
+import 'package:rehnuma/screens/story_screen.dart';
 import 'package:rehnuma/screens/today_performa_screen.dart';
 // ignore: import_of_legacy_library_into_null_safe
 
@@ -47,11 +48,11 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: [
-          Locale('en', ''), 
+          Locale('en', ''),
           Locale('ar', 'Arabic'),
         ],
         theme: ThemeData(
-          fontFamily: 'SukarBlack', 
+          fontFamily: 'SukarBlack',
           // primaryColor: appColor,
           colorScheme: ColorScheme.fromSwatch().copyWith(
             primary: appColor,
@@ -64,11 +65,11 @@ class MyApp extends StatelessWidget {
           GetPage(name: "/login", page: () => SignInScreen()),
           GetPage(name: "/splash", page: () => SplashScreen()),
           GetPage(name: "/aboutus", page: () => AboutUsScreen()),
-          GetPage(name: "/feedback", page: () => FeedbackScreen())
+          GetPage(name: "/feedback", page: () => FeedbackScreen()),
+          GetPage(name: "/story", page: () => StoryPage()),
         ],
         debugShowCheckedModeBanner: false,
-        initialRoute:
-            FirebaseAuth.instance.currentUser != null ? "/" : "/login",
+        initialRoute: '/splash',
       ),
     );
   }

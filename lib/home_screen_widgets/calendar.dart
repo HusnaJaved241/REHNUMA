@@ -5,14 +5,16 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 const calenderTextStyle = TextStyle(fontSize: 18.0, color: Colors.white);
 
 class Calendar extends StatefulWidget {
-  Calendar({Key? key}) : super(key: key);
+  Calendar({Key? key, required this.onChanged, required this.selectedDate}) : super(key: key);
+  final Function(DateTime, List) onChanged;
+  final DateTime selectedDate;
 
   @override
   State<Calendar> createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
-  DateTime _currentDate = DateTime.now();
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,12 @@ class _CalendarState extends State<Calendar> {
           color: Colors.white,
           fontSize: 15.0,
         ),
+
         weekDayPadding: const EdgeInsets.all(5.0),
         weekDayMargin: const EdgeInsets.all(1.0),
         dayButtonColor: Colors.pink.shade100,
         childAspectRatio: 1.5,
-        onDayPressed: (DateTime date, List events) {
-          this.setState(() => _currentDate = date);
-        },
+        onDayPressed: widget.onChanged,
         headerTextStyle: TextStyle(
           color: Colors.green,
           fontWeight: FontWeight.bold,
@@ -87,7 +88,7 @@ class _CalendarState extends State<Calendar> {
         weekFormat: false,
         // markedDatesMap: _markedDateMap,
         height: 400.0,
-        selectedDateTime: _currentDate,
+        selectedDateTime: widget.selectedDate,
         daysHaveCircularBorder: false,
 
         /// null for not rendering any border, true for circular border, false for rectangular border

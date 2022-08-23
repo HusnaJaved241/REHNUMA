@@ -136,7 +136,7 @@ class CustomTileQassas extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xffB788B7),
+          color: appColor,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Center(
